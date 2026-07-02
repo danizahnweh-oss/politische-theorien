@@ -42,14 +42,25 @@ if(opList){
 }
 
 // Wortschatzkarten (nur auf der Wortschatz-Seite)
+// Karte ist ein div (kein button): Chromium flacht 3D-Transforms in
+// button-Elementen ab, dadurch wuerde der Flip nicht sichtbar sein.
 const vocabWrap = document.querySelector("#vocab");
 if(vocabWrap){
   vocab.forEach(([term, definition]) => {
-    const card = document.createElement("button");
-    card.type = "button";
+    const card = document.createElement("div");
     card.className = "vcard";
+    card.tabIndex = 0;
+    card.setAttribute("role", "button");
+    card.setAttribute("aria-label", `Begriff ${term}, umdrehen fuer Definition`);
     card.innerHTML = `<span class="vcard-inner"><span class="vface vfront"><span class="vterm">${term}</span><span class="vhint">anklicken zum Umdrehen</span></span><span class="vface vback">${definition}</span></span>`;
-    card.addEventListener("click", () => card.classList.toggle("flip"));
+    const flip = () => card.classList.toggle("flip");
+    card.addEventListener("click", flip);
+    card.addEventListener("keydown", event => {
+      if(event.key === "Enter" || event.key === " "){
+        event.preventDefault();
+        flip();
+      }
+    });
     vocabWrap.appendChild(card);
   });
 }

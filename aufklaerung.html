@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&family=Spectral:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="css/style.css">
+<title>Aufklaerung M4-M6 - Rousseau, Montesquieu - Politische Theorien</title>
+</head>
+<body>
+<div id="progress"></div>
+
+<button class="op-toggle" id="opToggle" aria-expanded="false" aria-controls="opPanel">Operatoren-Hilfe</button>
+<div class="op-panel" id="opPanel" role="dialog" aria-label="Operatoren-Hilfe">
+  <button class="op-close" id="opClose" aria-label="Operatoren-Hilfe schließen">x</button>
+  <h4>Operatoren: Was soll ich tun?</h4>
+  <p class="op-intro">AFB I fragt Wissen ab, AFB II verlangt Erklaeren und Anwenden, AFB III verlangt ein begruendetes Urteil.</p>
+  <div id="opList"></div>
+</div>
+
+<nav aria-label="Seitennavigation">
+  <div class="nav-inner">
+    <a href="index.html">Start</a>
+    <a href="wortschatz.html">Wortschatz</a>
+    <a href="aufhaenger.html">Karikatur M1</a>
+    <a href="block1.html">Theorien M2/M3</a>
+    <a href="aufklaerung.html">Aufklaerung M4-M6</a>
+    <a href="block2.html">Gegenwart M7</a>
+    <a href="vergleich.html">Vergleich</a>
+    <a href="produkt.html">Schaubild</a>
+    <span class="nav-clock">Zeit: <b>2 x 90 Min</b></span>
+  </div>
+</nav>
+
+<section id="aufklaerung">
+  <div class="wrap">
+    <div class="sec-head"><span class="sec-num">3</span><h2>Aufklaerung: von der Lebensrealitaet zur Staatstheorie</h2></div>
+    <p class="sec-sub">Schulbuch Kapitel 3.2 · Material M4, M5 und M6. Von den Zustaenden des Ancien Régime zu den Visionen von Rousseau und Montesquieu.</p>
+
+    <div class="source">
+      <span class="source-tag accent">Arbeitsmaterial</span>
+      <p><b>M4</b> (Mediencode 71922-804): Gedankenexperiment "ChronoTours" - eine fiktive Zeitreise. <b>M5</b> (Mediencode 71922-805): "Alltag im Ancien Régime" mit dem Text von Klawitter zur Lebensrealitaet der Landbevoelkerung, dazu die Definition Ancien Régime. <b>M6</b> (Mediencode 71922-806): Rousseaus Gesellschaftsvertrag und Montesquieus Gewaltenteilung, Steckbriefe und die Definitionen Volkssouveraenitaet, Gewaltenteilung, Menschenrechte.</p>
+    </div>
+
+    <div class="thinker-grid">
+      <article class="thinker"><span class="claim">Volkssouveraenitaet</span><h3>Jean-Jacques Rousseau (1712-1778)</h3><ul><li>Der Mensch ist frei geboren, doch ueberall liegt er in Ketten.</li><li>Gesellschaftsvertrag: Freiheit durch Gemeinschaft.</li><li>Gemeinwille (volonté générale) zielt auf das Gemeinwohl.</li><li>Kritik: Privateigentum als Ursache sozialer Ungleichheit.</li></ul></article>
+      <article class="thinker"><span class="claim">Gewaltenteilung</span><h3>Montesquieu (1689-1755)</h3><ul><li>Macht muss Macht begrenzen.</li><li>Trennung von Legislative, Exekutive und Judikative.</li><li>Freiheit gibt es nur ohne Machtkonzentration.</li><li>Ziel: Schutz vor Willkuer und Tyrannei.</li></ul></article>
+    </div>
+
+    <h3>Aufgaben zu M4 und M5: die Ausgangslage</h3>
+
+    <div class="task">
+      <div class="q-meta"><span class="q-type">entwerfen</span><span class="q-pts">AFB II · M4 Gedankenexperiment</span></div>
+      <p class="qtext">Waehle fuer das ChronoTours-Gedankenexperiment (M4) einen Ort und eine Epoche vor 1789. Ermittle, welche heute selbstverstaendlichen Grundrechte dort nicht existierten oder stark eingeschraenkt waren, und lege die Folgen fuer den Alltag dar.</p>
+      <textarea data-min="260" placeholder="Reiseziel: ... (Ort, Epoche). Dort fehlten folgende Rechte: ... Fuer den Alltag bedeutete das ..."></textarea>
+      <div class="ta-meter"><span class="cnt">0 Zeichen</span><span class="ta-bar"><i></i></span></div>
+      <button class="btn" disabled>Musterloesung anzeigen</button>
+      <div class="reveal"><p>Beispiel Frankreich um 1780: Es fehlten Gleichheit vor dem Gesetz (Staendegesellschaft), Meinungs- und Pressefreiheit, Religionsfreiheit, politische Mitbestimmung und Eigentumssicherheit fuer Bauern. Folgen: willkuerliche Abgaben und Frondienste, keine Wahl der Herrschaft, Rechtsunsicherheit, kaum sozialer Aufstieg. Genau diese Missstaende bilden den Hintergrund fuer die Theorien von Rousseau und Montesquieu.</p></div>
+    </div>
+
+    <div class="task">
+      <div class="q-meta"><span class="q-type">beschreiben</span><span class="q-pts">AFB I-II · M5 (Aufgabe 1)</span></div>
+      <p class="qtext">Beschreibe mit dem Text von Klawitter (M5) die Situation des Dritten Standes im Ancien Régime.
+        <span class="sub">Achte auf Feudalitaet, Seigneur, Abgaben (Taille, Zehnt), Landbesitz und die Lage der Bauern.</span></p>
+      <textarea data-min="280" placeholder="Der Alltag der Landbevoelkerung war gepraegt von ... Abgaben wie ... Landbesitz war ..."></textarea>
+      <div class="ta-meter"><span class="cnt">0 Zeichen</span><span class="ta-bar"><i></i></span></div>
+      <button class="btn" disabled>Musterloesung anzeigen</button>
+      <div class="reveal"><p>Erwartbar: Der Alltag auf dem Land ist durch die Feudalitaet bestimmt; der Seigneur herrscht als Grundherr ueber Dorf und Vasallen. Der Adel besitzt rund 25 Prozent des Bodens, der Klerus etwa 10 Prozent; die meisten Bauern besitzen kein oder wenig eigenes Land und muessen es pachten. Sie tragen die Hauptlast der Abgaben (Koenigssteuer/Taille, Kirchenzehnt, Frondienste, Monopolabgaben fuer Muehle und Backofen) und verdienen am Ende nur wenige Sous am Tag, waehrend die Brotpreise steigen.</p></div>
+      <div class="diff">
+        <div class="diff-row"><button class="diff-btn">Hilfe anzeigen</button><button class="diff-btn">Challenge anzeigen</button></div>
+        <div class="diff-body">Hilfe: Sammle zuerst nur die Zahlen aus dem Text (Prozente, Sous, Brotpreis). Baue darum herum die Beschreibung.</div>
+        <div class="diff-body">Challenge: Erklaere, warum diese Lebensrealitaet den Wunsch nach den Ideen aus M6 verstaendlich macht.</div>
+      </div>
+    </div>
+
+    <h3>Aufgaben zu M6: die Visionen</h3>
+
+    <div class="task">
+      <div class="q-meta"><span class="q-type">erlaeutern</span><span class="q-pts">AFB II · M6 Text 1 (Rousseau)</span></div>
+      <p class="qtext">Erläutere anhand von Rousseaus Text (M6 Nr. 1) den Gesellschaftsvertrag und den Gemeinwillen.
+        <span class="sub">Kläre: Was ist das "grundlegende Problem", das der Gesellschaftsvertrag loesen soll? Was unterscheidet volonté générale (Gemeinwille) von der Summe der Einzelinteressen?</span></p>
+      <textarea data-min="300" placeholder="Das Grundproblem lautet ... Der Gemeinwille ist ... und unterscheidet sich von ..."></textarea>
+      <div class="ta-meter"><span class="cnt">0 Zeichen</span><span class="ta-bar"><i></i></span></div>
+      <button class="btn" disabled>Musterloesung anzeigen</button>
+      <div class="reveal"><p>Erwartbar: Der Mensch ist frei geboren, liegt aber ueberall in Ketten. Das Grundproblem: eine Form des Zusammenschlusses zu finden, die jeden schuetzt und in der jeder dennoch "so frei bleibt wie zuvor", weil er nur sich selbst gehorcht (den selbst gegebenen Gesetzen). Der Gemeinwille (volonté générale) zielt auf das gemeinsame Wohl und ist mehr als der Wille aller (volonté de tous), der nur die Summe der Sonderinteressen ist. Kern: Volkssouveraenitaet, Freiheit durch Beteiligung.</p></div>
+    </div>
+
+    <div class="task">
+      <div class="q-meta"><span class="q-type">erlaeutern</span><span class="q-pts">AFB II · M6 Text 2 (Montesquieu)</span></div>
+      <p class="qtext">Erläutere mit Montesquieus Text (M6 Nr. 2), warum politische Freiheit nach ihm nur durch die Trennung der Gewalten moeglich ist.
+        <span class="sub">Belege, was passiert, wenn legislative und exekutive Gewalt in einer Person vereint sind.</span></p>
+      <textarea data-min="260" placeholder="Montesquieu unterscheidet ... Freiheit ist gefaehrdet, sobald ..."></textarea>
+      <div class="ta-meter"><span class="cnt">0 Zeichen</span><span class="ta-bar"><i></i></span></div>
+      <button class="btn" disabled>Musterloesung anzeigen</button>
+      <div class="reveal"><p>Erwartbar: Politische Freiheit ist die aus Sicherheit entstehende Beruhigung. Sind legislative und exekutive Gewalt in einer Person oder Koerperschaft vereint, gibt es keine Freiheit, weil dieselbe Instanz tyrannische Gesetze erlassen und tyrannisch vollziehen kann. Ebenso darf die richterliche Gewalt nicht mit den anderen verbunden sein. Nur die Trennung von Legislative, Exekutive und Judikative sichert Freiheit. Kern: Gewaltenteilung als Schutz vor Willkuer.</p></div>
+    </div>
+
+    <div class="task">
+      <div class="q-meta"><span class="q-type">erlaeutern</span><span class="q-pts">AFB II · Aufgabe 2b</span></div>
+      <p class="qtext">Erläutere, wie die Ideen von Rousseau und Montesquieu auf die franzoesische Landbevoelkerung gewirkt haben koennten, haetten diese davon Kenntnis erlangt.
+        <span class="sub">Verbinde M5 (Lebensrealitaet) mit M6 (Ideen).</span></p>
+      <textarea data-min="260" placeholder="Fuer die Bauern, die unter ... litten, haetten Rousseaus und Montesquieus Ideen ... bedeutet, weil ..."></textarea>
+      <div class="ta-meter"><span class="cnt">0 Zeichen</span><span class="ta-bar"><i></i></span></div>
+      <button class="btn" disabled>Musterloesung anzeigen</button>
+      <div class="reveal"><p>Erwartbar: Fuer eine rechtlose, mit Abgaben belastete Landbevoelkerung waere Rousseaus Volkssouveraenitaet eine Sprengkraft gewesen: Herrschaft solle vom Volk ausgehen, nicht von Adel und Koenig. Montesquieus Gewaltenteilung haette die willkuerliche Verbindung von Gesetzgebung und Vollzug in der Hand des Seigneurs oder Monarchen als Ursache der Unfreiheit entlarvt. Beide Ideen konnten den Wunsch nach Gleichheit, Beteiligung und Rechtssicherheit begruenden und wirkten so revolutionaer.</p></div>
+    </div>
+
+    <div class="task">
+      <div class="q-meta"><span class="q-type afb3">vergleichen und bewerten</span><span class="q-pts">AFB III · Aufgabe 3 (Bruecke zu M7)</span></div>
+      <p class="qtext">Vergleiche die Konzepte "Gemeinwille" (Rousseau) und "Gewaltenteilung" (Montesquieu) im Hinblick auf ihre Umsetzung in der modernen Demokratie und bewerte, welches Konzept heute leichter verwirklicht ist.
+        <span class="sub">Diese Aufgabe leitet direkt zur Seite Gegenwart M7 ueber.</span></p>
+      <textarea data-min="340" placeholder="Der Gemeinwille laesst sich heute umsetzen durch ... Die Gewaltenteilung zeigt sich in ... Leichter verwirklicht ist ..., weil ..."></textarea>
+      <div class="ta-meter"><span class="cnt">0 Zeichen</span><span class="ta-bar"><i></i></span></div>
+      <button class="btn" disabled>Bewertungshilfe anzeigen</button>
+      <div class="reveal"><p>Erwartbar: Montesquieus Gewaltenteilung ist institutionell klar umgesetzt (Bundestag, Regierung, Gerichte; in Deutschland als Gewaltenverschraenkung, siehe M7). Rousseaus Gemeinwille ist schwerer fassbar: Wer bestimmt, was dem Gemeinwohl dient? In der repraesentativen Demokratie wird er ueber Wahlen und Parlament vermittelt, direktdemokratische Elemente bleiben begrenzt. Ein begruendetes Urteil nennt ein Kriterium (z. B. Kontrollierbarkeit) und entscheidet damit, meist zugunsten der leichter institutionalisierbaren Gewaltenteilung.</p></div>
+    </div>
+
+    <nav class="page-nav" aria-label="Seitenwechsel">
+      <a class="prev" href="block1.html"><span class="pn-dir">Zurueck</span><span class="pn-title">2 · Theorien M2/M3</span></a>
+      <a class="next" href="block2.html"><span class="pn-dir">Weiter</span><span class="pn-title">4 · Gegenwart M7</span></a>
+    </nav>
+  </div>
+</section>
+
+<footer>
+  Neue Unterrichtsseite zu politischen Theorien. Quellenbasis: bereitgestellte Buchseiten (M1-M7) und eigene didaktische Strukturierung.
+</footer>
+
+<script src="js/main.js"></script>
+</body>
+</html>

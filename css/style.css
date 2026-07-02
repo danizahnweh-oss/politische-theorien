@@ -111,8 +111,8 @@ p{margin:0 0 15px;max-width:68ch}
 .hook-card p{font-size:16px;color:var(--ink-soft)}
 
 .vocab-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin:20px 0}
-.vcard{background:var(--blatt);border:1px solid var(--line);border-radius:var(--r);min-height:112px;cursor:pointer;perspective:900px}
-.vcard-inner{position:relative;min-height:112px;transition:transform .45s var(--ease-in-out);transform-style:preserve-3d}
+.vcard{display:block;background:var(--blatt);border:1px solid var(--line);border-radius:var(--r);min-height:112px;cursor:pointer;perspective:900px}
+.vcard-inner{display:block;position:relative;min-height:112px;transition:transform .45s var(--ease-in-out);transform-style:preserve-3d}
 .vcard.flip .vcard-inner{transform:rotateY(180deg)}
 .vface{position:absolute;inset:0;backface-visibility:hidden;padding:16px;display:flex;flex-direction:column;justify-content:center}
 .vterm{font-family:var(--font-mono);font-weight:600;color:var(--steel)}
