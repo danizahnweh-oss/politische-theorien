@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&family=Spectral:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<title>Politische Theorien - Locke, Marx, Burke, Montesquieu, Rousseau</title>
+<style>
+  :root{
+    --paper:#dfe2e1;
+    --blatt:#f6f6f3;
+    --ink:#15181c;
+    --ink-soft:#565d63;
+    --line:#c4c8c6;
+    --accent:#9d2f22;
+    --accent-soft:#b06a4a;
+    --steel:#2a2f35;
+    --dienst:#26408b;
+    --ok:#2f6146;
+    --warn:#7a5a18;
+    --shadow:rgba(20,24,30,.14);
+    --ease-out:cubic-bezier(.23,1,.32,1);
+    --ease-in-out:cubic-bezier(.77,0,.175,1);
+    --font-display:"Archivo",ui-sans-serif,system-ui,sans-serif;
+    --font-body:"Spectral",Georgia,"Iowan Old Style",serif;
+    --font-mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:var(--font-body);
+    font-size:17px;
+    line-height:1.6;
+  }
+  h1,h2,h3,h4{font-family:var(--font-display)}
+  button,nav,.chip,.eyebrow,.q-meta,.phase-tag,.mini-label,.operator-word{font-family:var(--font-mono)}
+  a{color:var(--accent)}
+  a:focus-visible,button:focus-visible,textarea:focus-visible{outline:3px solid var(--dienst);outline-offset:3px}
+  .wrap{max-width:980px;margin:0 auto;padding:0 24px}
+  #progress{position:fixed;top:0;left:0;width:100%;height:4px;background:linear-gradient(90deg,var(--accent),var(--dienst));transform:scaleX(0);transform-origin:left;z-index:200}
+
+  nav{
+    position:sticky;
+    top:0;
+    z-index:120;
+    background:rgba(246,246,243,.95);
+    backdrop-filter:blur(8px);
+    border-bottom:1px solid var(--line);
+  }
+  .nav-inner{max-width:980px;margin:0 auto;display:flex;gap:4px;overflow-x:auto;padding:8px 12px;align-items:center}
+  nav a{font-size:12px;text-decoration:none;color:var(--ink-soft);white-space:nowrap;padding:8px 10px;border-radius:6px}
+  nav a:hover{background:#e9eceb;color:var(--ink)}
+  .nav-clock{margin-left:auto;border:1px solid var(--line);border-radius:999px;padding:6px 12px;font-size:12px;color:var(--ink-soft);white-space:nowrap}
+  .nav-clock b{color:var(--accent)}
+
+  header.hero{padding:64px 0 44px;border-bottom:2px solid var(--ink)}
+  .eyebrow{font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);font-weight:800;margin-bottom:16px}
+  h1{font-size:clamp(34px,6vw,58px);line-height:1.05;letter-spacing:-.02em;margin:0 0 18px;font-weight:800;max-width:900px}
+  .lede{font-size:19px;color:var(--ink-soft);max-width:760px;margin:0 0 24px}
+  .meta-row{display:flex;flex-wrap:wrap;gap:10px;margin:24px 0}
+  .chip{font-size:12px;background:#fff;border:1px solid var(--line);border-radius:999px;padding:7px 13px;color:var(--ink-soft)}
+  .chip b{color:var(--ink)}
+  .hero-grid{display:grid;grid-template-columns:minmax(0,1fr) 340px;gap:24px;align-items:stretch;margin-top:28px}
+  .brief{background:#fff;border:1px solid var(--line);border-radius:10px;padding:20px}
+  .brief h2{font-size:20px;margin:0 0 8px}
+  .brief p{margin:0;color:var(--ink-soft)}
+  .theory-compass{
+    background:#eef1f0;
+    border:1px solid var(--line);
+    border-radius:10px;
+    padding:18px;
+    min-height:260px;
+    position:relative;
+  }
+  .axis{position:absolute;background:var(--steel);opacity:.85}
+  .axis.x{left:36px;right:36px;top:50%;height:2px}
+  .axis.y{top:36px;bottom:36px;left:50%;width:2px}
+  .axis-label{position:absolute;font-family:var(--font-mono);font-size:11px;font-weight:800;color:var(--ink-soft);background:#eef1f0;padding:2px 5px}
+  .axis-label.left{left:16px;top:48%}
+  .axis-label.right{right:16px;top:48%}
+  .axis-label.top{top:14px;left:40%}
+  .axis-label.bottom{bottom:14px;left:34%}
+  .thinker-dot{position:absolute;display:flex;align-items:center;justify-content:center;width:72px;height:34px;border-radius:999px;background:#fff;border:1px solid var(--line);font-family:var(--font-mono);font-size:11px;font-weight:800;box-shadow:0 2px 8px var(--shadow)}
+  .dot-locke{right:42px;top:86px}
+  .dot-marx{left:42px;bottom:66px}
+  .dot-burke{left:54px;top:70px}
+  .dot-mont{right:70px;bottom:54px}
+  .dot-rousseau{left:132px;bottom:108px}
+
+  section{padding:48px 0;border-bottom:1px solid var(--line)}
+  .sec-head{display:flex;align-items:baseline;gap:14px;margin-bottom:8px}
+  .sec-num{font-family:var(--font-mono);font-weight:800;font-size:13px;color:#fff;background:var(--steel);border-radius:50%;width:32px;height:32px;display:inline-flex;align-items:center;justify-content:center;flex:0 0 auto}
+  h2{font-size:clamp(24px,4vw,34px);line-height:1.14;letter-spacing:-.01em;margin:0}
+  .sec-sub{color:var(--ink-soft);font-size:15px;font-style:italic;margin:2px 0 24px}
+  h3{font-size:20px;margin:28px 0 8px}
+  p{margin:0 0 14px}
+  .source,.task,.product-box,.phase,.rubric{background:#fff;border:1px solid var(--line);border-radius:10px;padding:20px;margin:20px 0}
+  .source{background:#eef1f0}
+  .source-tag,.mini-label{display:inline-flex;align-items:center;gap:6px;font-size:11px;letter-spacing:.08em;text-transform:uppercase;font-weight:800;color:#fff;background:var(--steel);border-radius:5px;padding:3px 8px;margin-bottom:8px}
+  .source-tag.accent{background:var(--accent)}
+  .hook-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:18px 0}
+  .hook-card{background:#fff;border:1px solid var(--line);border-radius:8px;padding:16px}
+  .hook-card h3{font-size:17px;margin:0 0 6px}
+  .hook-card p{font-size:15px;color:var(--ink-soft)}
+
+  .vocab-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin:18px 0}
+  .vcard{background:#fff;border:1px solid var(--line);border-radius:8px;min-height:112px;cursor:pointer;perspective:900px}
+  .vcard-inner{position:relative;min-height:112px;transition:transform .45s var(--ease-in-out);transform-style:preserve-3d}
+  .vcard.flip .vcard-inner{transform:rotateY(180deg)}
+  .vface{position:absolute;inset:0;backface-visibility:hidden;padding:16px;display:flex;flex-direction:column;justify-content:center}
+  .vterm{font-family:var(--font-mono);font-weight:800;color:var(--steel)}
+  .vhint{font-family:var(--font-mono);font-size:12px;color:var(--ink-soft);margin-top:6px}
+  .vback{transform:rotateY(180deg);background:#e9eceb;border-radius:8px;font-size:14px}
+
+  .phase{display:grid;grid-template-columns:112px 1fr;gap:18px;align-items:flex-start}
+  .phase-time{font-family:var(--font-mono);font-weight:800;color:#fff;background:var(--accent);border-radius:8px;padding:10px;text-align:center}
+  .phase h3{margin:0 0 6px}
+  .phase p{font-size:15.5px;color:var(--ink-soft)}
+  .phase-tag{display:inline-block;background:#e9eceb;border:1px solid var(--line);border-radius:999px;padding:4px 9px;font-size:11px;font-weight:800;color:var(--ink-soft);margin:8px 6px 0 0}
+
+  .thinker-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:14px;margin:20px 0}
+  .thinker{background:#fff;border:1px solid var(--line);border-radius:10px;padding:18px}
+  .thinker h3{margin:0 0 8px;font-size:18px}
+  .thinker ul{margin:0;padding-left:20px}
+  .thinker li{margin:6px 0;font-size:15px}
+  .claim{font-family:var(--font-mono);font-size:12px;font-weight:800;color:#fff;background:var(--dienst);border-radius:5px;padding:4px 8px;display:inline-block;margin-bottom:8px}
+
+  .task .q-meta{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-bottom:10px}
+  .q-type{font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;font-weight:800;color:#fff;background:var(--accent-soft);border-radius:4px;padding:3px 8px}
+  .q-type.afb3{background:var(--accent)}
+  .q-type.schaubild{background:var(--ok)}
+  .q-pts{font-size:11px;color:var(--ink-soft)}
+  .qtext{font-weight:600;margin-bottom:12px}
+  .qtext .sub{display:block;font-weight:400;font-size:14.5px;color:var(--ink-soft);margin-top:4px}
+  textarea{width:100%;min-height:112px;border:1px solid var(--line);border-radius:8px;background:#f3f5f4;color:var(--ink);padding:12px;font:16px/1.5 var(--font-body);resize:vertical}
+  .ta-meter{font-family:var(--font-mono);font-size:12px;color:var(--ink-soft);display:flex;justify-content:space-between;gap:12px;margin-top:7px}
+  .ta-bar{height:5px;background:var(--line);border-radius:99px;overflow:hidden;flex:1;max-width:220px;margin-top:7px}
+  .ta-bar i{display:block;height:100%;background:var(--accent);transform:scaleX(0);transform-origin:left;transition:transform .2s var(--ease-out)}
+  .btn{border:none;border-radius:7px;background:var(--steel);color:#fff;font-family:var(--font-mono);font-size:13px;font-weight:800;cursor:pointer;padding:10px 16px;margin-top:12px;min-height:44px;transition:transform .16s var(--ease-out),background-color .15s ease}
+  .btn:hover{background:#1f2830}
+  .btn:active:not(:disabled){transform:scale(.97)}
+  .btn:disabled{background:var(--line);color:#70777d;cursor:not-allowed}
+  .btn.ghost{background:transparent;color:var(--steel);border:1px solid var(--steel)}
+  .reveal{display:none;margin-top:14px;border-top:1px dashed var(--line);padding:14px;background:#f6f8f4;border-radius:0 0 8px 8px;font-size:15px}
+  .reveal.show{display:block;animation:fade .25s var(--ease-out)}
+  .diff{border-top:1px dashed var(--line);margin-top:14px;padding-top:12px}
+  .diff-row{display:flex;flex-wrap:wrap;gap:8px}
+  .diff-btn{border:1px solid var(--line);background:#f3f5f4;border-radius:7px;padding:9px 12px;min-height:44px;cursor:pointer;font-size:12px;font-weight:800;color:var(--steel)}
+  .diff-body{display:none;background:#eef1f0;border-radius:7px;padding:12px;margin-top:8px;font-size:14.5px}
+  .diff-body.show{display:block}
+
+  .matrix{overflow-x:auto;border:1px solid var(--line);border-radius:10px;background:#fff;margin:18px 0}
+  table{border-collapse:collapse;width:100%;min-width:760px;font-size:14px}
+  th,td{padding:12px;border-bottom:1px solid var(--line);vertical-align:top;text-align:left}
+  th{font-family:var(--font-mono);font-size:12px;background:#eef1f0}
+  tr:last-child td{border-bottom:none}
+  td:first-child{font-family:var(--font-mono);font-weight:800;color:var(--accent)}
+
+  .product-box{border-color:var(--ok);background:#eef5ef}
+  .product-box h3{margin-top:0}
+  .product-list{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px;margin:14px 0 0}
+  .product-list div{background:#fff;border:1px solid #bed2c4;border-radius:8px;padding:14px}
+  .rubric-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:12px}
+  .rubric h3{margin-top:0}
+  .rubric-card{background:#eef1f0;border:1px solid var(--line);border-radius:8px;padding:14px}
+  .rubric-card b{font-family:var(--font-mono);color:var(--steel)}
+
+  .op-toggle{position:fixed;right:20px;bottom:20px;z-index:180;background:var(--accent);color:#fff;border:none;border-radius:999px;padding:13px 20px;min-height:48px;font-weight:800;font-size:14px;cursor:pointer;box-shadow:0 6px 22px rgba(157,47,34,.36);display:flex;align-items:center;gap:8px}
+  .op-toggle:active{transform:scale(.97)}
+  .op-panel{position:fixed;right:14px;bottom:78px;width:min(380px,calc(100vw - 28px));max-height:66vh;overflow:auto;background:#fff;border:1px solid var(--line);border-radius:12px;box-shadow:0 12px 40px rgba(26,23,20,.28);padding:18px;z-index:170;display:none}
+  .op-panel.show{display:block;animation:popIn .2s var(--ease-out)}
+  .op-close{position:absolute;right:12px;top:10px;border:none;background:transparent;font-size:22px;line-height:1;cursor:pointer;color:var(--ink-soft)}
+  .op-panel h4{font-size:16px;margin:0 32px 4px 0}
+  .op-intro{font-size:13px;color:var(--ink-soft);margin:0 0 12px}
+  .op-item{border-top:1px solid var(--line);padding:10px 0}
+  .op-name{font-family:var(--font-mono);font-weight:800;color:var(--accent);font-size:13px}
+  .op-afb{font-family:var(--font-mono);font-size:10px;background:var(--dienst);color:#fff;border-radius:4px;padding:2px 6px;margin-left:6px}
+  .op-def{font-size:13px;margin:4px 0 0}
+
+  footer{padding:34px 0 70px;text-align:center;color:var(--ink-soft);font-family:var(--font-mono);font-size:12px}
+  @keyframes fade{from{opacity:0;transform:translateY(-4px)}to{opacity:1;transform:none}}
+  @keyframes popIn{from{opacity:0;transform:scale(.96)}to{opacity:1;transform:none}}
+  @media(max-width:760px){
+    .wrap{padding:0 18px}
+    header.hero{padding:44px 0 34px}
+    .hero-grid,.hook-grid,.phase{grid-template-columns:1fr}
+    .theory-compass{min-height:300px}
+    .phase-time{text-align:left}
+    .op-toggle{left:16px;right:16px;justify-content:center}
+    .op-panel{left:14px;right:14px;width:auto}
+  }
+  @media(prefers-reduced-motion:reduce){
+    *{animation:none!important;transition:none!important;scroll-behavior:auto!important}
+  }
+</style>
+</head>
+<body>
+<div id="progress"></div>
+
+<button class="op-toggle" id="opToggle" aria-expanded="false" aria-controls="opPanel">Operatoren-Hilfe</button>
+<div class="op-panel" id="opPanel" role="dialog" aria-label="Operatoren-Hilfe">
+  <button class="op-close" id="opClose" aria-label="Operatoren-Hilfe schließen">x</button>
+  <h4>Operatoren: Was soll ich tun?</h4>
+  <p class="op-intro">AFB I fragt Wissen ab, AFB II verlangt Erklaeren und Anwenden, AFB III verlangt ein begruendetes Urteil.</p>
+  <div id="opList"></div>
+</div>
+
+<nav aria-label="Seitennavigation">
+  <div class="nav-inner">
+    <a href="#start">Start</a>
+    <a href="#wortschatz">Wortschatz</a>
+    <a href="#aufhaenger">Aufhaenger</a>
+    <a href="#block1">90 Min 1</a>
+    <a href="#block2">90 Min 2</a>
+    <a href="#vergleich">Vergleich</a>
+    <a href="#produkt">Schaubild</a>
+    <span class="nav-clock">Zeit: <b>2 x 90 Min</b></span>
+  </div>
+</nav>
+
+<header class="hero" id="start">
+  <div class="wrap">
+    <div class="eyebrow">Politik und Gesellschaft · Q12 · Leistungsfach</div>
+    <h1>Wie haben sich politische Theorien entwickelt, die unser politisches System bis heute praegen?</h1>
+    <p class="lede">Eine anspruchsvolle Doppelstunde zu Locke, Marx, Burke, Montesquieu und Rousseau. Am Ende entsteht ein eigenes Schaubild, das historische Theorie, Kernidee und heutige Verfassungswirklichkeit verbindet.</p>
+    <div class="meta-row">
+      <span class="chip">Format <b>2 x 90 Minuten</b></span>
+      <span class="chip">Niveau <b>Gymnasium Bayern Q12 LF</b></span>
+      <span class="chip">Produkt <b>selbst erstelltes Schaubild</b></span>
+      <span class="chip">Hilfe <b>Operatoren dauerhaft rechts unten</b></span>
+    </div>
+    <div class="hero-grid">
+      <div class="brief">
+        <h2>Grosse Oberfrage</h2>
+        <p>Wie wurden aus historischen Antworten auf Herrschaft, Freiheit, Eigentum, Tradition und Gleichheit die politischen Ordnungsprinzipien, die wir heute in Demokratie, Grundrechten, Sozialstaat und Gewaltenteilung wiederfinden?</p>
+      </div>
+      <div class="theory-compass" aria-label="Schaubild mit Spannungsfeldern politischer Theorie">
+        <span class="axis x" aria-hidden="true"></span>
+        <span class="axis y" aria-hidden="true"></span>
+        <span class="axis-label left">Ordnung</span>
+        <span class="axis-label right">Freiheit</span>
+        <span class="axis-label top">Individuum</span>
+        <span class="axis-label bottom">Gemeinschaft</span>
+        <span class="thinker-dot dot-locke">Locke</span>
+        <span class="thinker-dot dot-marx">Marx</span>
+        <span class="thinker-dot dot-burke">Burke</span>
+        <span class="thinker-dot dot-mont">Montesq.</span>
+        <span class="thinker-dot dot-rousseau">Rousseau</span>
+      </div>
+    </div>
+  </div>
+</header>
+
+<section id="wortschatz">
+  <div class="wrap">
+    <div class="sec-head"><span class="sec-num">0</span><h2>Wortschatztraining: Begriffe sichern</h2></div>
+    <p class="sec-sub">Startphase: 15 bis 20 Minuten. Die Karten koennen einzeln aufgedeckt werden.</p>
+    <div class="vocab-grid" id="vocab"></div>
+    <div class="task">
+      <div class="q-meta"><span class="q-type">Kurzcheck</span><span class="q-pts">AFB I bis II</span></div>
+      <p class="qtext">Formuliere mit drei Begriffen aus den Karten einen Satz zur Oberfrage.
+        <span class="sub">Beispielstruktur: Eine politische Theorie erklaert, wie ...</span></p>
+      <textarea data-min="120" placeholder="Dein Satz mit mindestens drei Fachbegriffen ..."></textarea>
+      <div class="ta-meter"><span class="cnt">0 Zeichen</span><span class="ta-bar"><i></i></span></div>
+      <button class="btn" disabled>Musteridee anzeigen</button>
+      <div class="reveal"><p>Moegliche Antwort: Eine politische Theorie erklaert, wie das Verhaeltnis von Individuum, Staat und Gesellschaft geordnet werden soll, zum Beispiel durch Naturrechte, Gewaltenteilung oder Volkssouveraenitaet.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="aufhaenger">
+  <div class="wrap">
+    <div class="sec-head"><span class="sec-num">1</span><h2>Aktueller Aufhaenger: Wie viel Staat braucht Freiheit?</h2></div>
+    <p class="sec-sub">Diskussionsauftakt: 20 Minuten. Die Debatte ist bewusst gegenwartsnah und anschlussfaehig.</p>
+    <div class="source">
+      <span class="source-tag accent">Aktuelle Debatte 2026</span>
+      <p>In Deutschland wird 2026 weiter darueber gestritten, ob der Sozialstaat einfacher, digitaler und transparenter werden soll, wie stark Leistungen gekuerzt oder erhalten werden duerfen und wo staatliche Fuersorge in Bevormundung umschlaegt. Genau darin steckt die Grundfrage der Stunde: Ist Freiheit vor allem Schutz vor staatlichem Eingriff, oder braucht Freiheit soziale Sicherheit, gemeinsame Regeln und staatliche Ordnung?</p>
+    </div>
+    <div class="hook-grid">
+      <div class="hook-card">
+        <h3>Position A: weniger Staat</h3>
+        <p>Der Staat soll Menschen nicht im Detail vorschreiben, wie sie leben, heizen, arbeiten oder konsumieren. Freiheit bedeutet hier vor allem individuelle Entscheidung und Schutz vor Ueberregulierung.</p>
+      </div>
+      <div class="hook-card">
+        <h3>Position B: sozialer Staat</h3>
+        <p>Ohne soziale Absicherung bleibt Freiheit fuer viele nur formal. Freiheit braucht materielle Mindestbedingungen, Schutz vor Armut und faire Chancen.</p>
+      </div>
+    </div>
+    <div class="task">
+      <div class="q-meta"><span class="q-type afb3">Urteil</span><span class="q-pts">AFB III</span></div>
+      <p class="qtext">Beurteile spontan: Welche Position ist fuer dich ueberzeugender? Begruende mit einem Beispiel aus der Gegenwart.</p>
+      <textarea data-min="180" placeholder="Ich finde Position ... ueberzeugender, weil ..."></textarea>
+      <div class="ta-meter"><span class="cnt">0 Zeichen</span><span class="ta-bar"><i></i></span></div>
+      <button class="btn" disabled>Reflexionsimpuls anzeigen</button>
+      <div class="reveal"><p>Pruefe dein Urteil: Argumentierst du eher liberal (Freiheit des Individuums), sozialistisch (soziale Gerechtigkeit), konservativ (Ordnung und Stabilitaet) oder demokratietheoretisch (Legitimation durch Volk und Gewaltenteilung)? Genau diese Denkweisen werden jetzt historisch erschlossen.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="block1">
+  <div class="wrap">
+    <div class="sec-head"><span class="sec-num">2</span><h2>Erster 90-Minuten-Block: Historische Antworten verstehen</h2></div>
+    <p class="sec-sub">Ziel: Kernideen sicher herausarbeiten und den Ursprung der Theorien erkennen.</p>
+    <div class="phase">
+      <div class="phase-time">0-15 Min</div>
+      <div><h3>Einstieg ueber den Aufhaenger</h3><p>Positionslinie im Raum: Freiheit vor Staat vs. Freiheit durch Staat. Zwei Schuelerinnen oder Schueler begruenden kurz ihre Position.</p><span class="phase-tag">aktivierend</span><span class="phase-tag">kontrovers</span></div>
+    </div>
+    <div class="phase">
+      <div class="phase-time">15-35 Min</div>
+      <div><h3>Gruppenpuzzle: fuenf Theoretiker</h3><p>Expertengruppen arbeiten mit den Buchmaterialien: Burke, Locke, Marx, Rousseau und Montesquieu. Jede Gruppe sichert Kontext, Menschenbild, Staatsverstaendnis und heutige Spur.</p><span class="phase-tag">Materialarbeit</span><span class="phase-tag">AFB I-II</span></div>
+    </div>
+    <div class="phase">
+      <div class="phase-time">35-65 Min</div>
+      <div><h3>Rueckkehr in Stammgruppen</h3><p>Jede Expertin und jeder Experte erklaert eine Theorie. Die Stammgruppe fuellt die Vergleichsmatrix aus.</p><span class="phase-tag">kooperativ</span><span class="phase-tag">Sicherung</span></div>
+    </div>
+    <div class="phase">
+      <div class="phase-time">65-90 Min</div>
+      <div><h3>Zwischensicherung</h3><p>Die Klasse sortiert die Theorien an der Tafel entlang der Achsen Individuum - Staat und Freiheit - Ordnung. Daraus entsteht die Grundlage fuer das spaetere Schaubild.</p><span class="phase-tag">Tafelbild</span><span class="phase-tag">Transfer</span></div>
+    </div>
+
+    <div class="thinker-grid">
+      <article class="thinker"><span class="claim">Liberalismus</span><h3>John Locke</h3><ul><li>Naturrechte: Leben, Freiheit, Eigentum.</li><li>Staat entsteht durch Gesellschaftsvertrag.</li><li>Regierung ist begrenzt und rechenschaftspflichtig.</li><li>Spur heute: Grundrechte, Rechtsstaat, Schutz vor Willkuer.</li></ul></article>
+      <article class="thinker"><span class="claim">Konservatismus</span><h3>Edmund Burke</h3><ul><li>Gesellschaft ist historisch gewachsen.</li><li>Tradition schuetzt vor radikalem Umbruch.</li><li>Politik braucht Mass, Erfahrung und Kontinuitaet.</li><li>Spur heute: Stabilitaet, Institutionenvertrauen, Reform statt Bruch.</li></ul></article>
+      <article class="thinker"><span class="claim">Sozialismus</span><h3>Karl Marx</h3><ul><li>Geschichte ist gepraegt von Klassenkonflikten.</li><li>Kapitalismus erzeugt Ausbeutung und Ungleichheit.</li><li>Freiheit braucht Veraenderung der Eigentumsverhaeltnisse.</li><li>Spur heute: Sozialstaat, Verteilungsdebatten, Kritik an Macht der Maerkte.</li></ul></article>
+      <article class="thinker"><span class="claim">Volkssouveraenitaet</span><h3>Jean-Jacques Rousseau</h3><ul><li>Legitime Herrschaft geht vom Volk aus.</li><li>Gemeinwille zielt auf das gemeinsame Wohl.</li><li>Freiheit entsteht durch Beteiligung an selbst gegebenen Gesetzen.</li><li>Spur heute: Demokratieprinzip, Partizipation, direkte Demokratie.</li></ul></article>
+      <article class="thinker"><span class="claim">Gewaltenteilung</span><h3>Montesquieu</h3><ul><li>Macht muss Macht begrenzen.</li><li>Legislative, Exekutive und Judikative kontrollieren sich.</li><li>Freiheit braucht institutionelle Sicherungen.</li><li>Spur heute: Gewaltenteilung, Bundesverfassungsgericht, Checks and Balances.</li></ul></article>
+    </div>
+
+    <div class="task">
+      <div class="q-meta"><span class="q-type">Materialarbeit</span><span class="q-pts">AFB II</span></div>
+      <p class="qtext">Erlaeutere fuer einen Theoretiker deiner Wahl, welche Antwort er auf das Verhaeltnis von Individuum und Staat gibt.
+        <span class="sub">Nutze: Menschenbild, Problem seiner Zeit, Loesung, heutige Spur.</span></p>
+      <textarea data-min="260" placeholder="Der Theoretiker ... geht davon aus, dass ... Daraus folgt fuer den Staat ... Heute erkennt man das an ..."></textarea>
+      <div class="ta-meter"><span class="cnt">0 Zeichen</span><span class="ta-bar"><i></i></span></div>
+      <button class="btn" disabled>Musterstruktur anzeigen</button>
+      <div class="reveal"><p>Eine starke Antwort hat vier Schritte: Erstens das historische Problem nennen, zweitens die Kernidee erklaeren, drittens das Verhaeltnis von Individuum und Staat bestimmen, viertens eine heutige Spur im politischen System nennen.</p></div>
+      <div class="diff">
+        <div class="diff-row"><button class="diff-btn">Hilfe anzeigen</button><button class="diff-btn">Vertiefung anzeigen</button></div>
+        <div class="diff-body">Hilfe: Starte mit einem Satz wie: "Locke will das Individuum vor staatlicher Willkuer schuetzen." Danach erklaerst du Naturrechte und begrenzte Regierung.</div>
+        <div class="diff-body">Vertiefung: Vergleiche deinen Theoretiker mit einem Gegenspieler. Beispiel: Locke betont Eigentumsschutz, Marx kritisiert Eigentumsverhaeltnisse als Machtproblem.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="block2">
+  <div class="wrap">
+    <div class="sec-head"><span class="sec-num">3</span><h2>Zweiter 90-Minuten-Block: Theorien vergleichen und anwenden</h2></div>
+    <p class="sec-sub">Ziel: Theorien nicht nur kennen, sondern als Denkwerkzeuge nutzen.</p>
+    <div class="phase">
+      <div class="phase-time">0-15 Min</div>
+      <div><h3>Retrieval: Theorie-Speed-Dating</h3><p>Je zwei Lernende erklaeren sich gegenseitig eine Theorie in 60 Sekunden. Danach Wechsel.</p><span class="phase-tag">Wiederholung</span><span class="phase-tag">aktiv</span></div>
+    </div>
+    <div class="phase">
+      <div class="phase-time">15-45 Min</div>
+      <div><h3>Anwendung auf heutige Konflikte</h3><p>Die Gruppen ordnen aktuelle Spannungsfelder zu: Freiheit und Sicherheit, Tradition und Wandel, Eigentum und soziale Gerechtigkeit, Volkssouveraenitaet und Repraesentation.</p><span class="phase-tag">Transfer</span><span class="phase-tag">Gegenwart</span></div>
+    </div>
+    <div class="phase">
+      <div class="phase-time">45-75 Min</div>
+      <div><h3>Schaubild entwerfen</h3><p>Jede Gruppe erstellt ein Schaubild. Pflicht: alle fuenf Theoretiker, je eine Kernidee, mindestens drei heutige Spuren im politischen System.</p><span class="phase-tag">Produktarbeit</span><span class="phase-tag">Differenzierung</span></div>
+    </div>
+    <div class="phase">
+      <div class="phase-time">75-90 Min</div>
+      <div><h3>Galeriegang und Ueberarbeitung</h3><p>Die Schaubilder werden mit Klebepunkten oder digital kommentiert: klarste Theorie, beste heutige Spur, staerkste Visualisierung.</p><span class="phase-tag">Feedback</span><span class="phase-tag">Sicherung</span></div>
+    </div>
+
+    <div class="task">
+      <div class="q-meta"><span class="q-type afb3">Transfer</span><span class="q-pts">AFB III</span></div>
+      <p class="qtext">Waehle ein aktuelles Spannungsfeld und ordne mindestens zwei Theoretiker zu. Wer hilft, das Problem besser zu verstehen?
+        <span class="sub">Moegliche Spannungsfelder: Sozialstaat, Klimapolitik, Migration, KI-Regulierung, direkte Demokratie, Schutz von Grundrechten.</span></p>
+      <textarea data-min="300" placeholder="Das Spannungsfeld ... laesst sich mit ... und ... deuten, weil ..."></textarea>
+      <div class="ta-meter"><span class="cnt">0 Zeichen</span><span class="ta-bar"><i></i></span></div>
+      <button class="btn" disabled>Denkanstoss anzeigen</button>
+      <div class="reveal"><p>Beispiel Sozialstaat: Locke fragt nach Grenzen staatlicher Eingriffe und Eigentumsschutz. Marx fragt nach sozialer Ungleichheit und Abhaengigkeit. Burke fragt, ob Reformen die gewachsene Ordnung stabilisieren oder ueberfordern. Rousseau fragt, ob die Regelung dem Gemeinwillen dient.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="vergleich">
+  <div class="wrap">
+    <div class="sec-head"><span class="sec-num">4</span><h2>Vergleichsmatrix fuer die Sicherung</h2></div>
+    <p class="sec-sub">Diese Matrix kann direkt als Grundlage fuer das Schaubild dienen.</p>
+    <div class="matrix" role="region" aria-label="Vergleichsmatrix politischer Theorien" tabindex="0">
+      <table>
+        <thead><tr><th>Theoretiker</th><th>Historischer Kontext</th><th>Kernidee</th><th>Menschenbild</th><th>Heutige Spur</th></tr></thead>
+        <tbody>
+          <tr><td>Locke</td><td>Aufklaerung, Kritik am Absolutismus</td><td>Naturrechte und begrenzte Regierung</td><td>vernunftfaehig, frei, eigentumsfaehig</td><td>Grundrechte, Rechtsstaat, Regierung durch Zustimmung</td></tr>
+          <tr><td>Burke</td><td>Franzoesische Revolution als Warnsignal</td><td>Tradition und gewachsene Ordnung schuetzen Stabilitaet</td><td>begrenzt rational, eingebunden in Geschichte</td><td>Konservatismus, Institutionen, vorsichtige Reform</td></tr>
+          <tr><td>Marx</td><td>Industrialisierung und soziale Frage</td><td>Klassenkampf, Kritik an Ausbeutung</td><td>durch Produktionsverhaeltnisse gepraegt</td><td>Sozialstaat, Arbeitsrechte, Umverteilungsdebatten</td></tr>
+          <tr><td>Rousseau</td><td>Aufklaerung, Kritik sozialer Ungleichheit</td><td>Gesellschaftsvertrag und Gemeinwille</td><td>von Natur aus frei, durch Gesellschaft formbar</td><td>Volkssouveraenitaet, Partizipation, Gemeinwohl</td></tr>
+          <tr><td>Montesquieu</td><td>Kritik an Machtkonzentration</td><td>Gewaltenteilung verhindert Willkuer</td><td>machtanfaellig, deshalb kontrollbeduerftig</td><td>Legislative, Exekutive, Judikative, Verfassungsgericht</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<section id="produkt">
+  <div class="wrap">
+    <div class="sec-head"><span class="sec-num">5</span><h2>Endprodukt: eigenes Schaubild</h2></div>
+    <p class="sec-sub">Die Aufgabe ist anspruchsvoll, aber durch klare Kriterien gut steuerbar.</p>
+    <div class="product-box">
+      <h3>Arbeitsauftrag</h3>
+      <p>Erstelle ein Schaubild zur Oberfrage: <b>Wie haben sich politische Theorien entwickelt, die unser politisches System bis heute praegen?</b> Das Schaubild muss Zusammenhaenge zeigen, nicht nur Informationen nebeneinander sammeln.</p>
+      <div class="product-list">
+        <div><b>Pflicht 1:</b><br>alle fuenf Theoretiker mit je einer Kernidee</div>
+        <div><b>Pflicht 2:</b><br>mindestens drei heutige Spuren im politischen System</div>
+        <div><b>Pflicht 3:</b><br>eine sichtbare Oberstruktur, zum Beispiel Achsen, Netzwerk, Zeitstrahl oder Waage</div>
+        <div><b>Pflicht 4:</b><br>mindestens zwei Spannungsverhaeltnisse, etwa Freiheit vs. Sicherheit oder Tradition vs. Wandel</div>
+      </div>
+    </div>
+    <div class="rubric">
+      <h3>Bewertungskriterien</h3>
+      <div class="rubric-grid">
+        <div class="rubric-card"><b>Fachlichkeit</b><br>Kernideen stimmen und werden nicht vermischt.</div>
+        <div class="rubric-card"><b>Zusammenhang</b><br>Die Oberfrage wird sichtbar beantwortet.</div>
+        <div class="rubric-card"><b>Transfer</b><br>Heutige Spuren im politischen System sind konkret.</div>
+        <div class="rubric-card"><b>Gestaltung</b><br>Das Schaubild ist klar, lesbar und logisch aufgebaut.</div>
+      </div>
+    </div>
+    <div class="task">
+      <div class="q-meta"><span class="q-type schaubild">Planung</span><span class="q-pts">AFB II-III</span></div>
+      <p class="qtext">Skizziere hier vor dem Zeichnen deine Schaubild-Logik: Welche Form waehlt ihr und warum passt sie zur Oberfrage?</p>
+      <textarea data-min="220" placeholder="Wir waehlen als Struktur ..., weil ... Die Theoretiker ordnen wir so an: ..."></textarea>
+      <div class="ta-meter"><span class="cnt">0 Zeichen</span><span class="ta-bar"><i></i></span></div>
+      <button class="btn" disabled>Qualitaetscheck anzeigen</button>
+      <div class="reveal"><p>Qualitaetscheck: Wenn man euer Schaubild 20 Sekunden anschaut, muss klar werden: Welche Theorie steht wofuer? Welche heutigen Prinzipien gehen darauf zurueck? Wo gibt es Spannungen zwischen den Theorien?</p></div>
+      <div class="diff">
+        <div class="diff-row"><button class="diff-btn">Hilfestellung fuer schwächere Gruppen</button><button class="diff-btn">Challenge fuer starke Gruppen</button></div>
+        <div class="diff-body">Hilfestellung: Nutzt eine Tabelle als Rohfassung. Spalten: Theoretiker, Kernidee, heutige Spur, Symbol. Danach macht ihr daraus ein Schaubild.</div>
+        <div class="diff-body">Challenge: Zeigt nicht nur fuenf Einzeltheorien, sondern Konflikte zwischen ihnen. Beispiel: Locke vs. Marx bei Eigentum, Burke vs. Rousseau bei Wandel, Montesquieu als institutionelle Sicherung gegen Machtmissbrauch.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  Neue Unterrichtsseite zu politischen Theorien. Quellenbasis: bereitgestellte Buchseiten und eigene didaktische Strukturierung.
+</footer>
+
+<script>
+const operators = [
+  ["nennen","AFB I","Information knapp wiedergeben, ohne lange Erklaerung."],
+  ["beschreiben","AFB I","Material geordnet darstellen: Was sieht man? Was steht da?"],
+  ["herausarbeiten","AFB II","Zentrale Aussagen gezielt aus Material entnehmen und ordnen."],
+  ["erlaeutern","AFB II","Eine Aussage erklaeren und mit Hintergrundwissen verstaendlich machen."],
+  ["vergleichen","AFB II","Gemeinsamkeiten und Unterschiede nach klaren Kriterien zeigen."],
+  ["analysieren","AFB II","Material untersuchen: Aufbau, Inhalt, Aussage, Wirkung."],
+  ["beurteilen","AFB III","Argumente abwaegen und zu einem begruendeten Sachurteil kommen."],
+  ["bewerten","AFB III","Ein begruendetes Urteil mit eigenen oder vorgegebenen Wertmassstaeben formulieren."]
+];
+const vocab = [
+  ["Naturrechte","Vorstaatliche Rechte, die jedem Menschen zukommen, etwa Leben, Freiheit und Eigentum."],
+  ["Gesellschaftsvertrag","Denkmodell: Menschen gruenden eine politische Ordnung, um Freiheit und Sicherheit zu sichern."],
+  ["Volkssouveraenitaet","Die legitime Staatsgewalt geht vom Volk aus."],
+  ["Gewaltenteilung","Staatsgewalt wird auf Legislative, Exekutive und Judikative verteilt."],
+  ["Konservatismus","Politisches Denken, das Tradition, Ordnung und organischen Wandel betont."],
+  ["Liberalismus","Politisches Denken, das individuelle Freiheit, Rechte und begrenzte Herrschaft betont."],
+  ["Sozialismus","Politisches Denken, das soziale Gleichheit und Kritik an kapitalistischer Ausbeutung betont."],
+  ["Gemeinwille","Bei Rousseau der auf das Gemeinwohl gerichtete Wille des Volkes."],
+  ["Sozialstaat","Staatsprinzip, das soziale Sicherheit und faire Teilhabe sichern soll."],
+  ["Rechtsstaat","Staatliche Macht ist an Recht, Verfahren und Grundrechte gebunden."]
+];
+
+const opList = document.querySelector("#opList");
+operators.forEach(([name, afb, text]) => {
+  const item = document.createElement("div");
+  item.className = "op-item";
+  item.innerHTML = `<div><span class="op-name">${name}</span><span class="op-afb">${afb}</span></div><p class="op-def">${text}</p>`;
+  opList.appendChild(item);
+});
+
+const vocabWrap = document.querySelector("#vocab");
+vocab.forEach(([term, definition]) => {
+  const card = document.createElement("button");
+  card.type = "button";
+  card.className = "vcard";
+  card.innerHTML = `<span class="vcard-inner"><span class="vface vfront"><span class="vterm">${term}</span><span class="vhint">anklicken zum Umdrehen</span></span><span class="vface vback">${definition}</span></span>`;
+  card.addEventListener("click", () => card.classList.toggle("flip"));
+  vocabWrap.appendChild(card);
+});
+
+const opToggle = document.querySelector("#opToggle");
+const opPanel = document.querySelector("#opPanel");
+const opClose = document.querySelector("#opClose");
+function setOp(open){
+  opPanel.classList.toggle("show", open);
+  opToggle.setAttribute("aria-expanded", String(open));
+  if(open){opClose.focus();}
+}
+opToggle.addEventListener("click", () => setOp(!opPanel.classList.contains("show")));
+opClose.addEventListener("click", () => setOp(false));
+document.addEventListener("keydown", event => {
+  if(event.key === "Escape" && opPanel.classList.contains("show")){
+    setOp(false);
+    opToggle.focus();
+  }
+});
+
+document.querySelectorAll("textarea").forEach(area => {
+  const task = area.closest(".task");
+  const min = Number(area.dataset.min || 120);
+  const count = task.querySelector(".cnt");
+  const bar = task.querySelector(".ta-bar i");
+  const btn = task.querySelector(".btn:not(.ghost)");
+  area.addEventListener("input", () => {
+    const len = area.value.trim().length;
+    count.textContent = `${len} Zeichen`;
+    bar.style.transform = `scaleX(${Math.min(1, len / min)})`;
+    btn.disabled = len < min;
+  });
+  btn.addEventListener("click", () => {
+    const reveal = task.querySelector(".reveal");
+    reveal.classList.add("show");
+    btn.disabled = true;
+  });
+});
+
+document.querySelectorAll(".diff").forEach(diff => {
+  const buttons = diff.querySelectorAll(".diff-btn");
+  const bodies = diff.querySelectorAll(".diff-body");
+  buttons.forEach((button, index) => {
+    button.addEventListener("click", () => {
+      bodies[index].classList.toggle("show");
+    });
+  });
+});
+
+window.addEventListener("scroll", () => {
+  const max = document.documentElement.scrollHeight - innerHeight;
+  const p = max > 0 ? scrollY / max : 0;
+  document.querySelector("#progress").style.transform = `scaleX(${p})`;
+}, {passive:true});
+</script>
+</body>
+</html>
