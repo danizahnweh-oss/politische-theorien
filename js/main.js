@@ -275,6 +275,7 @@ if(opToggle && opPanel && opClose){
 
   const model = tasks.map((task, i) => {
     const area = task.querySelector("textarea");
+    if(!area){ return null; } // Quiz-Aufgabe (data-quiz): eigener Engine unten
     const min = Number(area.dataset.min || 120);
     const saved = store.load(i);
     if(typeof saved.v === "string"){ area.value = saved.v; }
@@ -291,7 +292,7 @@ if(opToggle && opPanel && opClose){
       btn: task.querySelector(".btn:not(.ghost)"),
       done(){ return this.area.value.trim().length >= this.min; }
     };
-  });
+  }).filter(Boolean);
 
   function refreshMeter(m){
     const len = m.area.value.trim().length;
@@ -327,7 +328,7 @@ if(opToggle && opPanel && opClose){
   reset.textContent = "Eingaben auf dieser Seite loeschen";
   reset.addEventListener("click", () => {
     if(confirm("Alle Eingaben auf dieser Seite loeschen?")){
-      store.clear(model.length);
+      store.clear(tasks.length);
       location.reload();
     }
   });
@@ -354,3 +355,205 @@ if(progress){
     progress.style.transform = `scaleX(${p})`;
   }, {passive:true});
 }
+
+// Interaktive Aufgaben (Quiz): Multiple Choice, Mehrfachauswahl, Wahr/Falsch,
+// Zuordnung. Deklarativ ueber data-quiz im Markup. Auswahl und Loesungsstatus
+// liegen unter demselben Schluessel wie die Textaufgaben
+// (ptheorie:<seite>:<index>, Index = Position in allen .task), damit der
+// vorhandene Seiten-Reset auch die Quizzes zuruecksetzt.
+(function(){
+  const quizzes = Array.from(document.querySelectorAll(".task[data-quiz]"));
+  if(!quizzes.length){ return; }
+  const allTasks = Array.from(document.querySelectorAll(".task"));
+  const qstore = {
+    key(i){ return `ptheorie:${currentPage}:${i}`; },
+    load(i){ try { return JSON.parse(localStorage.getItem(this.key(i))) || {}; } catch(e){ return {}; } },
+    save(i, data){ try { localStorage.setItem(this.key(i), JSON.stringify(data)); } catch(e){} }
+  };
+  function showFb(fb, kind, text){
+    if(!fb){ return; }
+    fb.textContent = text;
+    fb.classList.remove("ok", "warn");
+    fb.classList.add("show", kind);
+  }
+
+  // Multiple Choice: genau eine richtige Antwort, Sofort-Feedback.
+  function initMC(quiz, idx, saved){
+    const choices = Array.from(quiz.querySelectorAll(".choice"));
+    const fb = quiz.querySelector(".quiz-fb");
+    const explain = quiz.dataset.explain || "";
+    function solve(){
+      choices.forEach(c => {
+        c.disabled = true;
+        if(c.hasAttribute("data-correct")){ c.classList.add("correct"); }
+      });
+      showFb(fb, "ok", explain ? "Richtig. " + explain : "Richtig.");
+    }
+    if(saved.solved){ solve(); return; }
+    choices.forEach(c => {
+      c.addEventListener("click", () => {
+        if(c.hasAttribute("data-correct")){
+          solve();
+          qstore.save(idx, {type:"mc", solved:true});
+        } else {
+          c.classList.add("wrong");
+          c.disabled = true;
+          showFb(fb, "warn", "Nicht ganz - versuch eine andere Antwort.");
+        }
+      });
+    });
+  }
+
+  // Mehrfachauswahl: mehrere richtige Antworten, Auswertung erst per Pruefen.
+  function initMulti(quiz, idx, saved){
+    const choices = Array.from(quiz.querySelectorAll(".choice"));
+    const fb = quiz.querySelector(".quiz-fb");
+    const check = quiz.querySelector(".quiz-check");
+    const explain = quiz.dataset.explain || "";
+    let solved = false;
+    (saved.sel || []).forEach(i => {
+      if(choices[i]){ choices[i].classList.add("selected"); }
+    });
+    choices.forEach(c => {
+      c.setAttribute("aria-pressed", c.classList.contains("selected") ? "true" : "false");
+      c.addEventListener("click", () => {
+        if(solved){ return; }
+        const on = c.classList.toggle("selected");
+        c.setAttribute("aria-pressed", String(on));
+        c.classList.remove("correct", "wrong", "missed");
+        if(fb){ fb.classList.remove("show"); }
+      });
+    });
+    function evaluate(persist){
+      let allRight = true;
+      choices.forEach(c => {
+        const chosen = c.classList.contains("selected");
+        const correct = c.hasAttribute("data-correct");
+        c.classList.remove("wrong", "correct", "missed");
+        if(chosen && correct){ c.classList.add("correct"); }
+        else if(chosen && !correct){ c.classList.add("wrong"); allRight = false; }
+        else if(!chosen && correct){ c.classList.add("missed"); allRight = false; }
+      });
+      if(allRight){
+        solved = true;
+        choices.forEach(c => { c.disabled = true; });
+        if(check){ check.disabled = true; }
+        showFb(fb, "ok", explain ? "Alles richtig. " + explain : "Alles richtig.");
+      } else {
+        showFb(fb, "warn", "Noch nicht komplett. Gruen = richtig gewaehlt, rot = falsch gewaehlt, gestrichelt = fehlt.");
+      }
+      if(persist){
+        const sel = choices.map((c, i) => c.classList.contains("selected") ? i : -1).filter(i => i >= 0);
+        qstore.save(idx, {type:"multi", sel, solved});
+      }
+    }
+    if(check){ check.addEventListener("click", () => evaluate(true)); }
+    if(saved.solved){ evaluate(false); }
+  }
+
+  // Wahr/Falsch: jede Aussage einzeln, Sofort-Feedback pro Zeile.
+  function initTF(quiz, idx, saved){
+    const rows = Array.from(quiz.querySelectorAll(".tf-row"));
+    const fb = quiz.querySelector(".quiz-fb");
+    const explain = quiz.dataset.explain || "";
+    const done = new Set(saved.done || []);
+    function markSolved(row){
+      row.classList.add("solved");
+      row.querySelectorAll(".tf-btn").forEach(b => {
+        b.disabled = true;
+        if(b.dataset.val === row.dataset.answer){ b.classList.add("correct"); }
+      });
+    }
+    function checkAll(){
+      if(rows.length && rows.every(r => r.classList.contains("solved"))){
+        showFb(fb, "ok", explain ? "Alle Aussagen richtig eingeordnet. " + explain : "Alle Aussagen richtig eingeordnet.");
+      }
+    }
+    rows.forEach((row, i) => {
+      if(done.has(i)){ markSolved(row); }
+      row.querySelectorAll(".tf-btn").forEach(btn => {
+        btn.addEventListener("click", () => {
+          if(row.classList.contains("solved")){ return; }
+          if(btn.dataset.val === row.dataset.answer){
+            markSolved(row);
+            done.add(i);
+            qstore.save(idx, {type:"tf", done:[...done]});
+            checkAll();
+          } else {
+            btn.classList.add("wrong");
+            btn.disabled = true;
+          }
+        });
+      });
+    });
+    checkAll();
+  }
+
+  // Zuordnung: links Begriff antippen, rechts passende Aussage antippen.
+  function initMatch(quiz, idx, saved){
+    const left = quiz.querySelector('.match-col[data-side="left"]');
+    const right = quiz.querySelector('.match-col[data-side="right"]');
+    const fb = quiz.querySelector(".quiz-fb");
+    const explain = quiz.dataset.explain || "";
+    const leftItems = Array.from(left.querySelectorAll(".match-item"));
+    const rightItems = Array.from(right.querySelectorAll(".match-item"));
+    const total = leftItems.length;
+    const matched = new Set(saved.matched || []);
+    // Rechte Spalte mischen, solange noch nichts geloest ist.
+    if(!matched.size){
+      const shuffled = rightItems.slice();
+      for(let i = shuffled.length - 1; i > 0; i--){
+        const j = Math.floor(Math.random() * (i + 1));
+        [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+      }
+      shuffled.forEach(el => right.appendChild(el));
+    }
+    let pick = null;
+    function markDone(pair){
+      quiz.querySelectorAll(`.match-item[data-pair="${pair}"]`).forEach(el => {
+        el.classList.add("done");
+        el.classList.remove("picked");
+        el.disabled = true;
+      });
+    }
+    function finish(){
+      if(matched.size === total){
+        showFb(fb, "ok", explain ? "Alle Paare richtig zugeordnet. " + explain : "Alle Paare richtig zugeordnet.");
+      }
+    }
+    matched.forEach(p => markDone(p));
+    leftItems.forEach(el => el.addEventListener("click", () => {
+      if(el.disabled){ return; }
+      if(pick){ pick.classList.remove("picked"); }
+      pick = (pick === el) ? null : el;
+      if(pick){ pick.classList.add("picked"); }
+    }));
+    rightItems.forEach(el => el.addEventListener("click", () => {
+      if(el.disabled || !pick){ return; }
+      if(el.dataset.pair === pick.dataset.pair){
+        matched.add(Number(pick.dataset.pair));
+        markDone(Number(pick.dataset.pair));
+        pick = null;
+        qstore.save(idx, {type:"match", matched:[...matched]});
+        finish();
+      } else {
+        const a = pick, b = el;
+        a.classList.add("wrong"); b.classList.add("wrong");
+        a.classList.remove("picked");
+        pick = null;
+        setTimeout(() => { a.classList.remove("wrong"); b.classList.remove("wrong"); }, 700);
+      }
+    }));
+    finish();
+  }
+
+  quizzes.forEach(quiz => {
+    const idx = allTasks.indexOf(quiz);
+    const saved = qstore.load(idx);
+    const type = quiz.dataset.quiz;
+    if(type === "mc"){ initMC(quiz, idx, saved); }
+    else if(type === "multi"){ initMulti(quiz, idx, saved); }
+    else if(type === "tf"){ initTF(quiz, idx, saved); }
+    else if(type === "match"){ initMatch(quiz, idx, saved); }
+  });
+})();
