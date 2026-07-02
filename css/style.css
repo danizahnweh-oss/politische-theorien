@@ -134,10 +134,10 @@ figure.q-fig figcaption b{color:var(--ink)}
    auf die Hoehe der laengeren Seite, damit die Definition komplett lesbar ist. */
 .mcard-inner{position:relative;display:grid;width:100%;height:100%;min-height:150px;transition:transform .4s var(--ease-in-out);transform-style:preserve-3d}
 .mcard.flip .mcard-inner{transform:rotateY(180deg)}
-.mface{grid-area:1/1;backface-visibility:hidden;padding:16px;display:flex;flex-direction:column;justify-content:center;border-radius:var(--r)}
+.mface{grid-area:1/1;backface-visibility:hidden;padding:16px;display:flex;flex-direction:column;justify-content:center;border-radius:var(--r);overflow-wrap:anywhere;word-break:break-word;hyphens:auto}
 .mfront{align-items:center;font-family:var(--font-mono);font-weight:600;font-size:30px;color:var(--paper);background:var(--steel)}
 .mback{transform:rotateY(180deg);background:#ece7dc;font-size:15px;line-height:1.5}
-.mback.term{font-family:var(--font-mono);font-weight:600;font-size:18px;color:var(--accent);justify-content:center;text-align:center}
+.mback.term{font-family:var(--font-mono);font-weight:600;font-size:16px;color:var(--accent);justify-content:center;text-align:center}
 .mcard.done{cursor:default}
 .mcard.done .mback{box-shadow:inset 0 0 0 2px var(--ok)}
 .mem-status{font-family:var(--font-mono);font-size:14px;color:var(--ink-soft);margin:6px 0 0}
