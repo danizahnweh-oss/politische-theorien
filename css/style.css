@@ -209,6 +209,24 @@ textarea{width:100%;min-height:112px;border:1px solid var(--line-strong);border-
 .diff-body.show{display:block}
 
 .matrix{overflow-x:auto;border:1px solid var(--line-strong);border-radius:var(--r);background:var(--blatt);margin:20px 0}
+
+/* Vergleichsmatrix Drag-and-drop */
+.matrix-drag{margin:18px 0}
+.chip-pool{display:flex;flex-wrap:wrap;gap:8px;min-height:70px;padding:12px;background:#ece7dc;border:1px dashed var(--line-strong);border-radius:var(--r);margin:0 0 16px}
+.chip-pool.over{border-color:var(--accent);background:#e6ddcf}
+.mchip{cursor:grab;user-select:none;background:var(--blatt);border:1px solid var(--line-strong);border-radius:var(--r);padding:7px 10px;font-size:13.5px;line-height:1.35;box-shadow:0 1px 3px var(--shadow);max-width:230px}
+.mchip:active{cursor:grabbing}
+.mchip.sel{outline:3px solid var(--dienst);outline-offset:2px}
+td.drop{background:#f6f2ea;min-width:150px}
+td.drop.over{background:#e7efe7}
+td.drop .mchip{max-width:none;width:100%;box-shadow:none;cursor:grab}
+td.drop.correct{background:#e3efe6}
+td.drop.correct .mchip{border-color:var(--ok)}
+td.drop.wrong{background:#f4e4e1}
+td.drop.wrong .mchip{border-color:var(--accent)}
+.matrix-ctrl{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
+.matrix-status{font-family:var(--font-mono);font-size:14px;color:var(--ink-soft);margin:10px 0 0}
+.matrix-status.ok{color:var(--ok);font-weight:600}
 table{border-collapse:collapse;width:100%;min-width:760px;font-size:15px}
 th,td{padding:12px 14px;border-bottom:1px solid var(--line);vertical-align:top;text-align:left}
 th{font-family:var(--font-mono);font-size:11px;letter-spacing:.05em;text-transform:uppercase;background:#ece7dc;border-bottom:2px solid var(--ink)}

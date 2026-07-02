@@ -131,6 +131,112 @@ if(memWrap){
   if(restart){ restart.addEventListener("click", () => location.reload()); }
 }
 
+// Vergleichsmatrix als Drag-and-drop (nur auf der Vergleich-Seite).
+// Schuelerinnen und Schueler ziehen 20 Bausteine in die passenden Zellen;
+// funktioniert per Maus/Touch-Drag und per Antippen (Baustein -> Zelle).
+const matrixPool = document.querySelector("#matrixChips");
+if(matrixPool){
+  const matrixData = [
+    ["Aufklärung, Kritik am Absolutismus","Naturrechte und begrenzte Regierung","vernunftfähig, frei, eigentumsfähig","Grundrechte, Rechtsstaat, Regierung durch Zustimmung"],
+    ["Französische Revolution als Warnsignal","Tradition und gewachsene Ordnung schützen Stabilität","begrenzt rational, eingebunden in Geschichte","Konservatismus, Institutionen, vorsichtige Reform"],
+    ["Industrialisierung und soziale Frage","Klassenkampf, Kritik an Ausbeutung","durch Produktionsverhältnisse geprägt","Sozialstaat, Arbeitsrechte, Umverteilungsdebatten"],
+    ["Aufklärung, Kritik sozialer Ungleichheit","Gesellschaftsvertrag und Gemeinwille","von Natur aus frei, durch Gesellschaft formbar","Volkssouveränität, Partizipation, Gemeinwohl"],
+    ["Kritik an Machtkonzentration","Gewaltenteilung verhindert Willkür","machtanfällig, deshalb kontrollbedürftig","Legislative, Exekutive, Judikative, Verfassungsgericht"]
+  ];
+  const status = document.querySelector("#matrixStatus");
+  const drops = Array.from(document.querySelectorAll("#matrixGame .drop"));
+  const total = drops.length;
+  let selected = null;
+  let dragged = null;
+
+  const clearMarks = () => {
+    drops.forEach(d => d.classList.remove("correct", "wrong"));
+    status.classList.remove("ok");
+  };
+  const select = chip => {
+    if(selected){ selected.classList.remove("sel"); }
+    selected = (selected === chip) ? null : chip;
+    if(selected){ selected.classList.add("sel"); }
+  };
+  const place = (chip, target) => {
+    // Zielzelle schon belegt? vorhandenen Baustein zurueck in die Sammelbox.
+    if(target.classList.contains("drop")){
+      const existing = target.querySelector(".mchip");
+      if(existing && existing !== chip){ matrixPool.appendChild(existing); }
+    }
+    target.appendChild(chip);
+    if(selected === chip){ chip.classList.remove("sel"); selected = null; }
+    clearMarks();
+  };
+
+  // Bausteine bauen und mischen.
+  const chips = [];
+  matrixData.forEach((row, r) => row.forEach((text, c) => chips.push({key:`${r}-${c}`, text})));
+  for(let i = chips.length - 1; i > 0; i--){
+    const j = Math.floor(Math.random() * (i + 1));
+    [chips[i], chips[j]] = [chips[j], chips[i]];
+  }
+  chips.forEach(data => {
+    const chip = document.createElement("div");
+    chip.className = "mchip";
+    chip.textContent = data.text;
+    chip.dataset.key = data.key;
+    chip.draggable = true;
+    chip.tabIndex = 0;
+    chip.addEventListener("click", () => select(chip));
+    chip.addEventListener("keydown", e => {
+      if(e.key === "Enter" || e.key === " "){ e.preventDefault(); select(chip); }
+    });
+    chip.addEventListener("dragstart", e => {
+      dragged = chip;
+      e.dataTransfer.effectAllowed = "move";
+      e.dataTransfer.setData("text/plain", data.key);
+    });
+    chip.addEventListener("dragend", () => { dragged = null; });
+    matrixPool.appendChild(chip);
+  });
+
+  // Ziele: alle Zellen + die Sammelbox (zum Zuruecklegen).
+  const targets = drops.concat([matrixPool]);
+  targets.forEach(target => {
+    target.addEventListener("dragover", e => { e.preventDefault(); target.classList.add("over"); });
+    target.addEventListener("dragleave", () => target.classList.remove("over"));
+    target.addEventListener("drop", e => {
+      e.preventDefault();
+      target.classList.remove("over");
+      if(dragged){ place(dragged, target); }
+    });
+    // Antippen: ausgewaehlten Baustein hierher setzen.
+    target.addEventListener("click", e => {
+      if(!selected){ return; }
+      if(e.target.classList && e.target.classList.contains("mchip")){ return; }
+      place(selected, target);
+    });
+  });
+
+  document.querySelector("#matrixCheck").addEventListener("click", () => {
+    let ok = 0;
+    drops.forEach(d => {
+      d.classList.remove("correct", "wrong");
+      const chip = d.querySelector(".mchip");
+      if(!chip){ return; }
+      if(chip.dataset.key === d.dataset.key){ d.classList.add("correct"); ok++; }
+      else { d.classList.add("wrong"); }
+    });
+    status.textContent = ok === total
+      ? `Alle ${total} Zellen richtig zugeordnet. Stark!`
+      : `${ok} von ${total} Zellen richtig.`;
+    status.classList.toggle("ok", ok === total);
+  });
+
+  document.querySelector("#matrixReset").addEventListener("click", () => {
+    document.querySelectorAll("#matrixGame .mchip").forEach(chip => matrixPool.appendChild(chip));
+    if(selected){ selected.classList.remove("sel"); selected = null; }
+    clearMarks();
+    status.textContent = `0 von ${total} Zellen richtig.`;
+  });
+}
+
 const opToggle = document.querySelector("#opToggle");
 const opPanel = document.querySelector("#opPanel");
 const opClose = document.querySelector("#opClose");

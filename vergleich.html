@@ -6,7 +6,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&family=Spectral:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
-<link rel="stylesheet" href="css/style.css?v=5">
+<link rel="stylesheet" href="css/style.css?v=4">
 <title>Vergleichsmatrix - Politische Theorien</title>
 </head>
 <body>
@@ -36,27 +36,31 @@
 <section id="vergleich">
   <div class="wrap">
     <div class="sec-head"><span class="sec-num">5</span><h2>Vergleichsmatrix für die Sicherung</h2></div>
-    <p class="sec-sub">Diese Matrix bündelt M2 und M6. Sie kann direkt als Grundlage für das Schaubild dienen - erst selbst ausfüllen, dann mit der Lösung abgleichen.</p>
-    <div class="matrix" role="region" aria-label="Vergleichsmatrix politischer Theorien" tabindex="0">
-      <table>
-        <thead><tr><th>Theoretiker</th><th>Historischer Kontext</th><th>Kernidee</th><th>Menschenbild</th><th>Heutige Spur</th></tr></thead>
-        <tbody>
-          <tr><td>Locke</td><td>Aufklärung, Kritik am Absolutismus</td><td>Naturrechte und begrenzte Regierung</td><td>vernunftfähig, frei, eigentumsfähig</td><td>Grundrechte, Rechtsstaat, Regierung durch Zustimmung</td></tr>
-          <tr><td>Burke</td><td>Französische Revolution als Warnsignal</td><td>Tradition und gewachsene Ordnung schützen Stabilität</td><td>begrenzt rational, eingebunden in Geschichte</td><td>Konservatismus, Institutionen, vorsichtige Reform</td></tr>
-          <tr><td>Marx</td><td>Industrialisierung und soziale Frage</td><td>Klassenkampf, Kritik an Ausbeutung</td><td>durch Produktionsverhältnisse geprägt</td><td>Sozialstaat, Arbeitsrechte, Umverteilungsdebatten</td></tr>
-          <tr><td>Rousseau</td><td>Aufklärung, Kritik sozialer Ungleichheit</td><td>Gesellschaftsvertrag und Gemeinwille</td><td>von Natur aus frei, durch Gesellschaft formbar</td><td>Volkssouveränität, Partizipation, Gemeinwohl</td></tr>
-          <tr><td>Montesquieu</td><td>Kritik an Machtkonzentration</td><td>Gewaltenteilung verhindert Willkür</td><td>machtanfällig, deshalb kontrollbedürftig</td><td>Legislative, Exekutive, Judikative, Verfassungsgericht</td></tr>
-        </tbody>
-      </table>
-    </div>
+    <p class="sec-sub">Diese Matrix bündelt M2 und M6. Ziehe die Begriffe unten in die passende Zelle. Danach prüfst du deine Zuordnung und nutzt die Matrix als Grundlage für das Schaubild.</p>
 
-    <div class="task">
-      <div class="q-meta"><span class="q-type">herausarbeiten</span><span class="q-pts">AFB II · M2 und M6</span></div>
-      <p class="qtext">Fülle die Matrix zuerst selbst aus, ohne oben zu spicken: Wähle zwei Theoretiker und notiere für jeden Kontext, Kernidee, Menschenbild und heutige Spur. Gleiche danach mit der Tabelle ab und korrigiere in einer anderen Farbe.</p>
-      <textarea data-min="300" placeholder="Theoretiker 1: Kontext ... Kernidee ... Menschenbild ... heutige Spur ... | Theoretiker 2: ..."></textarea>
-      <div class="ta-meter"><span class="cnt">0 Zeichen</span><span class="ta-bar"><i></i></span></div>
-      <button class="btn" disabled>Selbstkontrolle anzeigen</button>
-      <div class="reveal"><p>Selbstcheck: Stimmt die Kernidee mit dem Quellentext überein (nicht mit dem Alltagsverständnis)? Ist die heutige Spur konkret (z. B. Bundesverfassungsgericht, Verfassungsbeschwerde, Sozialstaat) und nicht nur ein Schlagwort? Ist das Menschenbild vom Staatsverständnis getrennt? Wenn drei Spalten stimmen und belegt sind, ist die Zeile stark.</p></div>
+    <div class="matrix-drag" id="matrixGame">
+      <p>So geht's: Ziehe jeden Baustein per Maus in die richtige Zelle - oder tippe erst den Baustein an und dann die Zelle. Falsch platziert? Baustein zurück in die Sammelbox ziehen oder in eine andere Zelle. Wenn alle Zellen belegt sind, auf <b>Prüfen</b> tippen.</p>
+
+      <div class="chip-pool" id="matrixChips" aria-label="Bausteine zum Einordnen"></div>
+
+      <div class="matrix" role="region" aria-label="Vergleichsmatrix politischer Theorien" tabindex="0">
+        <table>
+          <thead><tr><th>Theoretiker</th><th>Historischer Kontext</th><th>Kernidee</th><th>Menschenbild</th><th>Heutige Spur</th></tr></thead>
+          <tbody>
+            <tr><td class="rowhead">Locke</td><td class="drop" data-key="0-0"></td><td class="drop" data-key="0-1"></td><td class="drop" data-key="0-2"></td><td class="drop" data-key="0-3"></td></tr>
+            <tr><td class="rowhead">Burke</td><td class="drop" data-key="1-0"></td><td class="drop" data-key="1-1"></td><td class="drop" data-key="1-2"></td><td class="drop" data-key="1-3"></td></tr>
+            <tr><td class="rowhead">Marx</td><td class="drop" data-key="2-0"></td><td class="drop" data-key="2-1"></td><td class="drop" data-key="2-2"></td><td class="drop" data-key="2-3"></td></tr>
+            <tr><td class="rowhead">Rousseau</td><td class="drop" data-key="3-0"></td><td class="drop" data-key="3-1"></td><td class="drop" data-key="3-2"></td><td class="drop" data-key="3-3"></td></tr>
+            <tr><td class="rowhead">Montesquieu</td><td class="drop" data-key="4-0"></td><td class="drop" data-key="4-1"></td><td class="drop" data-key="4-2"></td><td class="drop" data-key="4-3"></td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="matrix-ctrl">
+        <button class="btn" id="matrixCheck" type="button">Prüfen</button>
+        <button class="btn ghost" id="matrixReset" type="button">Zurücksetzen</button>
+      </div>
+      <p class="matrix-status" id="matrixStatus" role="status" aria-live="polite">0 von 20 Zellen richtig.</p>
     </div>
 
     <nav class="page-nav" aria-label="Seitenwechsel">
@@ -70,6 +74,6 @@
   Neue Unterrichtsseite zu politischen Theorien. Quellenbasis: bereitgestellte Buchseiten und eigene didaktische Strukturierung.
 </footer>
 
-<script src="js/main.js?v=5"></script>
+<script src="js/main.js?v=4"></script>
 </body>
 </html>
