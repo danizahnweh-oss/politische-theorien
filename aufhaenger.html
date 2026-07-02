@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&family=Spectral:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="css/style.css">
+<title>Aktueller Aufhaenger - Politische Theorien</title>
+</head>
+<body>
+<div id="progress"></div>
+
+<button class="op-toggle" id="opToggle" aria-expanded="false" aria-controls="opPanel">Operatoren-Hilfe</button>
+<div class="op-panel" id="opPanel" role="dialog" aria-label="Operatoren-Hilfe">
+  <button class="op-close" id="opClose" aria-label="Operatoren-Hilfe schließen">x</button>
+  <h4>Operatoren: Was soll ich tun?</h4>
+  <p class="op-intro">AFB I fragt Wissen ab, AFB II verlangt Erklaeren und Anwenden, AFB III verlangt ein begruendetes Urteil.</p>
+  <div id="opList"></div>
+</div>
+
+<nav aria-label="Seitennavigation">
+  <div class="nav-inner">
+    <a href="index.html">Start</a>
+    <a href="wortschatz.html">Wortschatz</a>
+    <a href="aufhaenger.html">Aufhaenger</a>
+    <a href="block1.html">90 Min 1</a>
+    <a href="block2.html">90 Min 2</a>
+    <a href="vergleich.html">Vergleich</a>
+    <a href="produkt.html">Schaubild</a>
+    <span class="nav-clock">Zeit: <b>2 x 90 Min</b></span>
+  </div>
+</nav>
+
+<section id="aufhaenger">
+  <div class="wrap">
+    <div class="sec-head"><span class="sec-num">1</span><h2>Aktueller Aufhaenger: Wie viel Staat braucht Freiheit?</h2></div>
+    <p class="sec-sub">Diskussionsauftakt: 20 Minuten. Die Debatte ist bewusst gegenwartsnah und anschlussfaehig.</p>
+    <div class="source">
+      <span class="source-tag accent">Aktuelle Debatte 2026</span>
+      <p>In Deutschland wird 2026 weiter darueber gestritten, ob der Sozialstaat einfacher, digitaler und transparenter werden soll, wie stark Leistungen gekuerzt oder erhalten werden duerfen und wo staatliche Fuersorge in Bevormundung umschlaegt. Genau darin steckt die Grundfrage der Stunde: Ist Freiheit vor allem Schutz vor staatlichem Eingriff, oder braucht Freiheit soziale Sicherheit, gemeinsame Regeln und staatliche Ordnung?</p>
+    </div>
+    <div class="hook-grid">
+      <div class="hook-card">
+        <h3>Position A: weniger Staat</h3>
+        <p>Der Staat soll Menschen nicht im Detail vorschreiben, wie sie leben, heizen, arbeiten oder konsumieren. Freiheit bedeutet hier vor allem individuelle Entscheidung und Schutz vor Ueberregulierung.</p>
+      </div>
+      <div class="hook-card">
+        <h3>Position B: sozialer Staat</h3>
+        <p>Ohne soziale Absicherung bleibt Freiheit fuer viele nur formal. Freiheit braucht materielle Mindestbedingungen, Schutz vor Armut und faire Chancen.</p>
+      </div>
+    </div>
+    <div class="task">
+      <div class="q-meta"><span class="q-type afb3">Urteil</span><span class="q-pts">AFB III</span></div>
+      <p class="qtext">Beurteile spontan: Welche Position ist fuer dich ueberzeugender? Begruende mit einem Beispiel aus der Gegenwart.</p>
+      <textarea data-min="180" placeholder="Ich finde Position ... ueberzeugender, weil ..."></textarea>
+      <div class="ta-meter"><span class="cnt">0 Zeichen</span><span class="ta-bar"><i></i></span></div>
+      <button class="btn" disabled>Reflexionsimpuls anzeigen</button>
+      <div class="reveal"><p>Pruefe dein Urteil: Argumentierst du eher liberal (Freiheit des Individuums), sozialistisch (soziale Gerechtigkeit), konservativ (Ordnung und Stabilitaet) oder demokratietheoretisch (Legitimation durch Volk und Gewaltenteilung)? Genau diese Denkweisen werden jetzt historisch erschlossen.</p></div>
+    </div>
+
+    <nav class="page-nav" aria-label="Seitenwechsel">
+      <a class="prev" href="wortschatz.html"><span class="pn-dir">Zurueck</span><span class="pn-title">0 · Wortschatztraining</span></a>
+      <a class="next" href="block1.html"><span class="pn-dir">Weiter</span><span class="pn-title">2 · Erster 90-Minuten-Block</span></a>
+    </nav>
+  </div>
+</section>
+
+<footer>
+  Neue Unterrichtsseite zu politischen Theorien. Quellenbasis: bereitgestellte Buchseiten und eigene didaktische Strukturierung.
+</footer>
+
+<script src="js/main.js"></script>
+</body>
+</html>

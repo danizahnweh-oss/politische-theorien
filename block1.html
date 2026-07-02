@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&family=Spectral:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="css/style.css">
+<title>Erster 90-Minuten-Block - Politische Theorien</title>
+</head>
+<body>
+<div id="progress"></div>
+
+<button class="op-toggle" id="opToggle" aria-expanded="false" aria-controls="opPanel">Operatoren-Hilfe</button>
+<div class="op-panel" id="opPanel" role="dialog" aria-label="Operatoren-Hilfe">
+  <button class="op-close" id="opClose" aria-label="Operatoren-Hilfe schließen">x</button>
+  <h4>Operatoren: Was soll ich tun?</h4>
+  <p class="op-intro">AFB I fragt Wissen ab, AFB II verlangt Erklaeren und Anwenden, AFB III verlangt ein begruendetes Urteil.</p>
+  <div id="opList"></div>
+</div>
+
+<nav aria-label="Seitennavigation">
+  <div class="nav-inner">
+    <a href="index.html">Start</a>
+    <a href="wortschatz.html">Wortschatz</a>
+    <a href="aufhaenger.html">Aufhaenger</a>
+    <a href="block1.html">90 Min 1</a>
+    <a href="block2.html">90 Min 2</a>
+    <a href="vergleich.html">Vergleich</a>
+    <a href="produkt.html">Schaubild</a>
+    <span class="nav-clock">Zeit: <b>2 x 90 Min</b></span>
+  </div>
+</nav>
+
+<section id="block1">
+  <div class="wrap">
+    <div class="sec-head"><span class="sec-num">2</span><h2>Erster 90-Minuten-Block: Historische Antworten verstehen</h2></div>
+    <p class="sec-sub">Ziel: Kernideen sicher herausarbeiten und den Ursprung der Theorien erkennen.</p>
+    <div class="phase">
+      <div class="phase-time">0-15 Min</div>
+      <div><h3>Einstieg ueber den Aufhaenger</h3><p>Positionslinie im Raum: Freiheit vor Staat vs. Freiheit durch Staat. Zwei Schuelerinnen oder Schueler begruenden kurz ihre Position.</p><span class="phase-tag">aktivierend</span><span class="phase-tag">kontrovers</span></div>
+    </div>
+    <div class="phase">
+      <div class="phase-time">15-35 Min</div>
+      <div><h3>Gruppenpuzzle: fuenf Theoretiker</h3><p>Expertengruppen arbeiten mit den Buchmaterialien: Burke, Locke, Marx, Rousseau und Montesquieu. Jede Gruppe sichert Kontext, Menschenbild, Staatsverstaendnis und heutige Spur.</p><span class="phase-tag">Materialarbeit</span><span class="phase-tag">AFB I-II</span></div>
+    </div>
+    <div class="phase">
+      <div class="phase-time">35-65 Min</div>
+      <div><h3>Rueckkehr in Stammgruppen</h3><p>Jede Expertin und jeder Experte erklaert eine Theorie. Die Stammgruppe fuellt die Vergleichsmatrix aus.</p><span class="phase-tag">kooperativ</span><span class="phase-tag">Sicherung</span></div>
+    </div>
+    <div class="phase">
+      <div class="phase-time">65-90 Min</div>
+      <div><h3>Zwischensicherung</h3><p>Die Klasse sortiert die Theorien an der Tafel entlang der Achsen Individuum - Staat und Freiheit - Ordnung. Daraus entsteht die Grundlage fuer das spaetere Schaubild.</p><span class="phase-tag">Tafelbild</span><span class="phase-tag">Transfer</span></div>
+    </div>
+
+    <div class="thinker-grid">
+      <article class="thinker"><span class="claim">Liberalismus</span><h3>John Locke</h3><ul><li>Naturrechte: Leben, Freiheit, Eigentum.</li><li>Staat entsteht durch Gesellschaftsvertrag.</li><li>Regierung ist begrenzt und rechenschaftspflichtig.</li><li>Spur heute: Grundrechte, Rechtsstaat, Schutz vor Willkuer.</li></ul></article>
+      <article class="thinker"><span class="claim">Konservatismus</span><h3>Edmund Burke</h3><ul><li>Gesellschaft ist historisch gewachsen.</li><li>Tradition schuetzt vor radikalem Umbruch.</li><li>Politik braucht Mass, Erfahrung und Kontinuitaet.</li><li>Spur heute: Stabilitaet, Institutionenvertrauen, Reform statt Bruch.</li></ul></article>
+      <article class="thinker"><span class="claim">Sozialismus</span><h3>Karl Marx</h3><ul><li>Geschichte ist gepraegt von Klassenkonflikten.</li><li>Kapitalismus erzeugt Ausbeutung und Ungleichheit.</li><li>Freiheit braucht Veraenderung der Eigentumsverhaeltnisse.</li><li>Spur heute: Sozialstaat, Verteilungsdebatten, Kritik an Macht der Maerkte.</li></ul></article>
+      <article class="thinker"><span class="claim">Volkssouveraenitaet</span><h3>Jean-Jacques Rousseau</h3><ul><li>Legitime Herrschaft geht vom Volk aus.</li><li>Gemeinwille zielt auf das gemeinsame Wohl.</li><li>Freiheit entsteht durch Beteiligung an selbst gegebenen Gesetzen.</li><li>Spur heute: Demokratieprinzip, Partizipation, direkte Demokratie.</li></ul></article>
+      <article class="thinker"><span class="claim">Gewaltenteilung</span><h3>Montesquieu</h3><ul><li>Macht muss Macht begrenzen.</li><li>Legislative, Exekutive und Judikative kontrollieren sich.</li><li>Freiheit braucht institutionelle Sicherungen.</li><li>Spur heute: Gewaltenteilung, Bundesverfassungsgericht, Checks and Balances.</li></ul></article>
+    </div>
+
+    <div class="task">
+      <div class="q-meta"><span class="q-type">Materialarbeit</span><span class="q-pts">AFB II</span></div>
+      <p class="qtext">Erlaeutere fuer einen Theoretiker deiner Wahl, welche Antwort er auf das Verhaeltnis von Individuum und Staat gibt.
+        <span class="sub">Nutze: Menschenbild, Problem seiner Zeit, Loesung, heutige Spur.</span></p>
+      <textarea data-min="260" placeholder="Der Theoretiker ... geht davon aus, dass ... Daraus folgt fuer den Staat ... Heute erkennt man das an ..."></textarea>
+      <div class="ta-meter"><span class="cnt">0 Zeichen</span><span class="ta-bar"><i></i></span></div>
+      <button class="btn" disabled>Musterstruktur anzeigen</button>
+      <div class="reveal"><p>Eine starke Antwort hat vier Schritte: Erstens das historische Problem nennen, zweitens die Kernidee erklaeren, drittens das Verhaeltnis von Individuum und Staat bestimmen, viertens eine heutige Spur im politischen System nennen.</p></div>
+      <div class="diff">
+        <div class="diff-row"><button class="diff-btn">Hilfe anzeigen</button><button class="diff-btn">Vertiefung anzeigen</button></div>
+        <div class="diff-body">Hilfe: Starte mit einem Satz wie: "Locke will das Individuum vor staatlicher Willkuer schuetzen." Danach erklaerst du Naturrechte und begrenzte Regierung.</div>
+        <div class="diff-body">Vertiefung: Vergleiche deinen Theoretiker mit einem Gegenspieler. Beispiel: Locke betont Eigentumsschutz, Marx kritisiert Eigentumsverhaeltnisse als Machtproblem.</div>
+      </div>
+    </div>
+
+    <nav class="page-nav" aria-label="Seitenwechsel">
+      <a class="prev" href="aufhaenger.html"><span class="pn-dir">Zurueck</span><span class="pn-title">1 · Aktueller Aufhaenger</span></a>
+      <a class="next" href="block2.html"><span class="pn-dir">Weiter</span><span class="pn-title">3 · Zweiter 90-Minuten-Block</span></a>
+    </nav>
+  </div>
+</section>
+
+<footer>
+  Neue Unterrichtsseite zu politischen Theorien. Quellenbasis: bereitgestellte Buchseiten und eigene didaktische Strukturierung.
+</footer>
+
+<script src="js/main.js"></script>
+</body>
+</html>

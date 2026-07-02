@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&family=Spectral:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="css/style.css">
+<title>Endprodukt Schaubild - Politische Theorien</title>
+</head>
+<body>
+<div id="progress"></div>
+
+<button class="op-toggle" id="opToggle" aria-expanded="false" aria-controls="opPanel">Operatoren-Hilfe</button>
+<div class="op-panel" id="opPanel" role="dialog" aria-label="Operatoren-Hilfe">
+  <button class="op-close" id="opClose" aria-label="Operatoren-Hilfe schließen">x</button>
+  <h4>Operatoren: Was soll ich tun?</h4>
+  <p class="op-intro">AFB I fragt Wissen ab, AFB II verlangt Erklaeren und Anwenden, AFB III verlangt ein begruendetes Urteil.</p>
+  <div id="opList"></div>
+</div>
+
+<nav aria-label="Seitennavigation">
+  <div class="nav-inner">
+    <a href="index.html">Start</a>
+    <a href="wortschatz.html">Wortschatz</a>
+    <a href="aufhaenger.html">Aufhaenger</a>
+    <a href="block1.html">90 Min 1</a>
+    <a href="block2.html">90 Min 2</a>
+    <a href="vergleich.html">Vergleich</a>
+    <a href="produkt.html">Schaubild</a>
+    <span class="nav-clock">Zeit: <b>2 x 90 Min</b></span>
+  </div>
+</nav>
+
+<section id="produkt">
+  <div class="wrap">
+    <div class="sec-head"><span class="sec-num">5</span><h2>Endprodukt: eigenes Schaubild</h2></div>
+    <p class="sec-sub">Die Aufgabe ist anspruchsvoll, aber durch klare Kriterien gut steuerbar.</p>
+    <div class="product-box">
+      <h3>Arbeitsauftrag</h3>
+      <p>Erstelle ein Schaubild zur Oberfrage: <b>Wie haben sich politische Theorien entwickelt, die unser politisches System bis heute praegen?</b> Das Schaubild muss Zusammenhaenge zeigen, nicht nur Informationen nebeneinander sammeln.</p>
+      <div class="product-list">
+        <div><b>Pflicht 1:</b><br>alle fuenf Theoretiker mit je einer Kernidee</div>
+        <div><b>Pflicht 2:</b><br>mindestens drei heutige Spuren im politischen System</div>
+        <div><b>Pflicht 3:</b><br>eine sichtbare Oberstruktur, zum Beispiel Achsen, Netzwerk, Zeitstrahl oder Waage</div>
+        <div><b>Pflicht 4:</b><br>mindestens zwei Spannungsverhaeltnisse, etwa Freiheit vs. Sicherheit oder Tradition vs. Wandel</div>
+      </div>
+    </div>
+    <div class="rubric">
+      <h3>Bewertungskriterien</h3>
+      <div class="rubric-grid">
+        <div class="rubric-card"><b>Fachlichkeit</b><br>Kernideen stimmen und werden nicht vermischt.</div>
+        <div class="rubric-card"><b>Zusammenhang</b><br>Die Oberfrage wird sichtbar beantwortet.</div>
+        <div class="rubric-card"><b>Transfer</b><br>Heutige Spuren im politischen System sind konkret.</div>
+        <div class="rubric-card"><b>Gestaltung</b><br>Das Schaubild ist klar, lesbar und logisch aufgebaut.</div>
+      </div>
+    </div>
+    <div class="task">
+      <div class="q-meta"><span class="q-type schaubild">Planung</span><span class="q-pts">AFB II-III</span></div>
+      <p class="qtext">Skizziere hier vor dem Zeichnen deine Schaubild-Logik: Welche Form waehlt ihr und warum passt sie zur Oberfrage?</p>
+      <textarea data-min="220" placeholder="Wir waehlen als Struktur ..., weil ... Die Theoretiker ordnen wir so an: ..."></textarea>
+      <div class="ta-meter"><span class="cnt">0 Zeichen</span><span class="ta-bar"><i></i></span></div>
+      <button class="btn" disabled>Qualitaetscheck anzeigen</button>
+      <div class="reveal"><p>Qualitaetscheck: Wenn man euer Schaubild 20 Sekunden anschaut, muss klar werden: Welche Theorie steht wofuer? Welche heutigen Prinzipien gehen darauf zurueck? Wo gibt es Spannungen zwischen den Theorien?</p></div>
+      <div class="diff">
+        <div class="diff-row"><button class="diff-btn">Hilfestellung fuer schwächere Gruppen</button><button class="diff-btn">Challenge fuer starke Gruppen</button></div>
+        <div class="diff-body">Hilfestellung: Nutzt eine Tabelle als Rohfassung. Spalten: Theoretiker, Kernidee, heutige Spur, Symbol. Danach macht ihr daraus ein Schaubild.</div>
+        <div class="diff-body">Challenge: Zeigt nicht nur fuenf Einzeltheorien, sondern Konflikte zwischen ihnen. Beispiel: Locke vs. Marx bei Eigentum, Burke vs. Rousseau bei Wandel, Montesquieu als institutionelle Sicherung gegen Machtmissbrauch.</div>
+      </div>
+    </div>
+
+    <nav class="page-nav" aria-label="Seitenwechsel">
+      <a class="prev" href="vergleich.html"><span class="pn-dir">Zurueck</span><span class="pn-title">4 · Vergleichsmatrix</span></a>
+      <a class="next" href="index.html"><span class="pn-dir">Weiter</span><span class="pn-title">Zurueck zum Start</span></a>
+    </nav>
+  </div>
+</section>
+
+<footer>
+  Neue Unterrichtsseite zu politischen Theorien. Quellenbasis: bereitgestellte Buchseiten und eigene didaktische Strukturierung.
+</footer>
+
+<script src="js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&family=Spectral:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="css/style.css">
+<title>Vergleichsmatrix - Politische Theorien</title>
+</head>
+<body>
+<div id="progress"></div>
+
+<button class="op-toggle" id="opToggle" aria-expanded="false" aria-controls="opPanel">Operatoren-Hilfe</button>
+<div class="op-panel" id="opPanel" role="dialog" aria-label="Operatoren-Hilfe">
+  <button class="op-close" id="opClose" aria-label="Operatoren-Hilfe schließen">x</button>
+  <h4>Operatoren: Was soll ich tun?</h4>
+  <p class="op-intro">AFB I fragt Wissen ab, AFB II verlangt Erklaeren und Anwenden, AFB III verlangt ein begruendetes Urteil.</p>
+  <div id="opList"></div>
+</div>
+
+<nav aria-label="Seitennavigation">
+  <div class="nav-inner">
+    <a href="index.html">Start</a>
+    <a href="wortschatz.html">Wortschatz</a>
+    <a href="aufhaenger.html">Aufhaenger</a>
+    <a href="block1.html">90 Min 1</a>
+    <a href="block2.html">90 Min 2</a>
+    <a href="vergleich.html">Vergleich</a>
+    <a href="produkt.html">Schaubild</a>
+    <span class="nav-clock">Zeit: <b>2 x 90 Min</b></span>
+  </div>
+</nav>
+
+<section id="vergleich">
+  <div class="wrap">
+    <div class="sec-head"><span class="sec-num">4</span><h2>Vergleichsmatrix fuer die Sicherung</h2></div>
+    <p class="sec-sub">Diese Matrix kann direkt als Grundlage fuer das Schaubild dienen.</p>
+    <div class="matrix" role="region" aria-label="Vergleichsmatrix politischer Theorien" tabindex="0">
+      <table>
+        <thead><tr><th>Theoretiker</th><th>Historischer Kontext</th><th>Kernidee</th><th>Menschenbild</th><th>Heutige Spur</th></tr></thead>
+        <tbody>
+          <tr><td>Locke</td><td>Aufklaerung, Kritik am Absolutismus</td><td>Naturrechte und begrenzte Regierung</td><td>vernunftfaehig, frei, eigentumsfaehig</td><td>Grundrechte, Rechtsstaat, Regierung durch Zustimmung</td></tr>
+          <tr><td>Burke</td><td>Franzoesische Revolution als Warnsignal</td><td>Tradition und gewachsene Ordnung schuetzen Stabilitaet</td><td>begrenzt rational, eingebunden in Geschichte</td><td>Konservatismus, Institutionen, vorsichtige Reform</td></tr>
+          <tr><td>Marx</td><td>Industrialisierung und soziale Frage</td><td>Klassenkampf, Kritik an Ausbeutung</td><td>durch Produktionsverhaeltnisse gepraegt</td><td>Sozialstaat, Arbeitsrechte, Umverteilungsdebatten</td></tr>
+          <tr><td>Rousseau</td><td>Aufklaerung, Kritik sozialer Ungleichheit</td><td>Gesellschaftsvertrag und Gemeinwille</td><td>von Natur aus frei, durch Gesellschaft formbar</td><td>Volkssouveraenitaet, Partizipation, Gemeinwohl</td></tr>
+          <tr><td>Montesquieu</td><td>Kritik an Machtkonzentration</td><td>Gewaltenteilung verhindert Willkuer</td><td>machtanfaellig, deshalb kontrollbeduerftig</td><td>Legislative, Exekutive, Judikative, Verfassungsgericht</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <nav class="page-nav" aria-label="Seitenwechsel">
+      <a class="prev" href="block2.html"><span class="pn-dir">Zurueck</span><span class="pn-title">3 · Zweiter 90-Minuten-Block</span></a>
+      <a class="next" href="produkt.html"><span class="pn-dir">Weiter</span><span class="pn-title">5 · Endprodukt Schaubild</span></a>
+    </nav>
+  </div>
+</section>
+
+<footer>
+  Neue Unterrichtsseite zu politischen Theorien. Quellenbasis: bereitgestellte Buchseiten und eigene didaktische Strukturierung.
+</footer>
+
+<script src="js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;700;800&family=Spectral:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="css/style.css">
+<title>Zweiter 90-Minuten-Block - Politische Theorien</title>
+</head>
+<body>
+<div id="progress"></div>
+
+<button class="op-toggle" id="opToggle" aria-expanded="false" aria-controls="opPanel">Operatoren-Hilfe</button>
+<div class="op-panel" id="opPanel" role="dialog" aria-label="Operatoren-Hilfe">
+  <button class="op-close" id="opClose" aria-label="Operatoren-Hilfe schließen">x</button>
+  <h4>Operatoren: Was soll ich tun?</h4>
+  <p class="op-intro">AFB I fragt Wissen ab, AFB II verlangt Erklaeren und Anwenden, AFB III verlangt ein begruendetes Urteil.</p>
+  <div id="opList"></div>
+</div>
+
+<nav aria-label="Seitennavigation">
+  <div class="nav-inner">
+    <a href="index.html">Start</a>
+    <a href="wortschatz.html">Wortschatz</a>
+    <a href="aufhaenger.html">Aufhaenger</a>
+    <a href="block1.html">90 Min 1</a>
+    <a href="block2.html">90 Min 2</a>
+    <a href="vergleich.html">Vergleich</a>
+    <a href="produkt.html">Schaubild</a>
+    <span class="nav-clock">Zeit: <b>2 x 90 Min</b></span>
+  </div>
+</nav>
+
+<section id="block2">
+  <div class="wrap">
+    <div class="sec-head"><span class="sec-num">3</span><h2>Zweiter 90-Minuten-Block: Theorien vergleichen und anwenden</h2></div>
+    <p class="sec-sub">Ziel: Theorien nicht nur kennen, sondern als Denkwerkzeuge nutzen.</p>
+    <div class="phase">
+      <div class="phase-time">0-15 Min</div>
+      <div><h3>Retrieval: Theorie-Speed-Dating</h3><p>Je zwei Lernende erklaeren sich gegenseitig eine Theorie in 60 Sekunden. Danach Wechsel.</p><span class="phase-tag">Wiederholung</span><span class="phase-tag">aktiv</span></div>
+    </div>
+    <div class="phase">
+      <div class="phase-time">15-45 Min</div>
+      <div><h3>Anwendung auf heutige Konflikte</h3><p>Die Gruppen ordnen aktuelle Spannungsfelder zu: Freiheit und Sicherheit, Tradition und Wandel, Eigentum und soziale Gerechtigkeit, Volkssouveraenitaet und Repraesentation.</p><span class="phase-tag">Transfer</span><span class="phase-tag">Gegenwart</span></div>
+    </div>
+    <div class="phase">
+      <div class="phase-time">45-75 Min</div>
+      <div><h3>Schaubild entwerfen</h3><p>Jede Gruppe erstellt ein Schaubild. Pflicht: alle fuenf Theoretiker, je eine Kernidee, mindestens drei heutige Spuren im politischen System.</p><span class="phase-tag">Produktarbeit</span><span class="phase-tag">Differenzierung</span></div>
+    </div>
+    <div class="phase">
+      <div class="phase-time">75-90 Min</div>
+      <div><h3>Galeriegang und Ueberarbeitung</h3><p>Die Schaubilder werden mit Klebepunkten oder digital kommentiert: klarste Theorie, beste heutige Spur, staerkste Visualisierung.</p><span class="phase-tag">Feedback</span><span class="phase-tag">Sicherung</span></div>
+    </div>
+
+    <div class="task">
+      <div class="q-meta"><span class="q-type afb3">Transfer</span><span class="q-pts">AFB III</span></div>
+      <p class="qtext">Waehle ein aktuelles Spannungsfeld und ordne mindestens zwei Theoretiker zu. Wer hilft, das Problem besser zu verstehen?
+        <span class="sub">Moegliche Spannungsfelder: Sozialstaat, Klimapolitik, Migration, KI-Regulierung, direkte Demokratie, Schutz von Grundrechten.</span></p>
+      <textarea data-min="300" placeholder="Das Spannungsfeld ... laesst sich mit ... und ... deuten, weil ..."></textarea>
+      <div class="ta-meter"><span class="cnt">0 Zeichen</span><span class="ta-bar"><i></i></span></div>
+      <button class="btn" disabled>Denkanstoss anzeigen</button>
+      <div class="reveal"><p>Beispiel Sozialstaat: Locke fragt nach Grenzen staatlicher Eingriffe und Eigentumsschutz. Marx fragt nach sozialer Ungleichheit und Abhaengigkeit. Burke fragt, ob Reformen die gewachsene Ordnung stabilisieren oder ueberfordern. Rousseau fragt, ob die Regelung dem Gemeinwillen dient.</p></div>
+    </div>
+
+    <nav class="page-nav" aria-label="Seitenwechsel">
+      <a class="prev" href="block1.html"><span class="pn-dir">Zurueck</span><span class="pn-title">2 · Erster 90-Minuten-Block</span></a>
+      <a class="next" href="vergleich.html"><span class="pn-dir">Weiter</span><span class="pn-title">4 · Vergleichsmatrix</span></a>
+    </nav>
+  </div>
+</section>
+
+<footer>
+  Neue Unterrichtsseite zu politischen Theorien. Quellenbasis: bereitgestellte Buchseiten und eigene didaktische Strukturierung.
+</footer>
+
+<script src="js/main.js"></script>
+</body>
+</html>
