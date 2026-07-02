@@ -173,7 +173,7 @@ if(opToggle && opPanel && opClose){
     const saved = store.load(i);
     if(typeof saved.v === "string"){ area.value = saved.v; }
     const reveal = task.querySelector(".reveal");
-    if(saved.r){ reveal.classList.add("show"); }
+    if(reveal){ reveal.classList.add("show"); } // alles dauerhaft offen: Loesung immer sichtbar
     const note = document.createElement("div");
     note.className = "lock-note";
     note.innerHTML = `<span class="lock-ic">&#128274;</span> Erst die vorherige Aufgabe bearbeiten (mind. ${min} Zeichen).`;
@@ -189,9 +189,8 @@ if(opToggle && opPanel && opClose){
 
   function refreshMeter(m){
     const len = m.area.value.trim().length;
-    m.count.textContent = `${len} Zeichen`;
-    m.bar.style.transform = `scaleX(${Math.min(1, len / m.min)})`;
-    m.btn.disabled = len < m.min || m.reveal.classList.contains("show");
+    if(m.count){ m.count.textContent = `${len} Zeichen`; }
+    if(m.bar){ m.bar.style.transform = `scaleX(${Math.min(1, len / m.min)})`; }
   }
   function persist(m){
     store.save(m.i, {v: m.area.value, r: m.reveal.classList.contains("show")});
@@ -206,14 +205,9 @@ if(opToggle && opPanel && opClose){
   }
 
   model.forEach(m => {
+    if(m.btn){ m.btn.hidden = true; } // Loesung dauerhaft offen: Button entfaellt
     m.area.addEventListener("input", () => {
       refreshMeter(m);
-      persist(m);
-      applyLocks();
-    });
-    m.btn.addEventListener("click", () => {
-      m.reveal.classList.add("show");
-      m.btn.disabled = true;
       persist(m);
     });
   });
@@ -226,7 +220,7 @@ if(opToggle && opPanel && opClose){
   reset.className = "progress-reset";
   reset.textContent = "Eingaben auf dieser Seite loeschen";
   reset.addEventListener("click", () => {
-    if(confirm("Alle Eingaben auf dieser Seite loeschen und Aufgaben wieder sperren?")){
+    if(confirm("Alle Eingaben auf dieser Seite loeschen?")){
       store.clear(model.length);
       location.reload();
     }
@@ -238,6 +232,7 @@ if(opToggle && opPanel && opClose){
 document.querySelectorAll(".diff").forEach(diff => {
   const buttons = diff.querySelectorAll(".diff-btn");
   const bodies = diff.querySelectorAll(".diff-body");
+  bodies.forEach(body => body.classList.add("show")); // alles dauerhaft offen
   buttons.forEach((button, index) => {
     button.addEventListener("click", () => {
       bodies[index].classList.toggle("show");
