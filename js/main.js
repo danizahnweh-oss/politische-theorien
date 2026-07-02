@@ -150,11 +150,12 @@ if(opToggle && opPanel && opClose){
   });
 }
 
-// Aufgaben: sequenziell freischalten + Fortschritt lokal speichern.
-// Eine Aufgabe gilt als bearbeitet, sobald der Text die Mindestlaenge
-// (data-min) erreicht; erst dann wird die naechste Aufgabe entsperrt.
-// Alle Eingaben und der aufgedeckte Loesungsstatus liegen in localStorage,
-// pro Seite und Aufgaben-Index, und werden beim Laden wiederhergestellt.
+// Aufgaben: alle dauerhaft offen (keine sequenzielle Sperre) + Fortschritt
+// lokal speichern. Der Zaehler/Meter und der Loesungs-Button haengen weiter
+// an der Mindestlaenge (data-min): die Musterloesung wird erst nach dem
+// Schreiben freigegeben. Alle Eingaben und der aufgedeckte Loesungsstatus
+// liegen in localStorage, pro Seite und Aufgaben-Index, und werden beim
+// Laden wiederhergestellt.
 (function(){
   const tasks = Array.from(document.querySelectorAll(".task"));
   if(!tasks.length){ return; }
@@ -195,14 +196,12 @@ if(opToggle && opPanel && opClose){
   function persist(m){
     store.save(m.i, {v: m.area.value, r: m.reveal.classList.contains("show")});
   }
+  // Alle Aufgaben dauerhaft offen: keine sequenzielle Sperre mehr.
   function applyLocks(){
-    let prevDone = true;
     model.forEach(m => {
-      const unlocked = prevDone;
-      m.task.classList.toggle("locked", !unlocked);
-      m.area.disabled = !unlocked;
-      if(unlocked){ refreshMeter(m); } else { m.btn.disabled = true; }
-      prevDone = unlocked && m.done();
+      m.task.classList.remove("locked");
+      m.area.disabled = false;
+      refreshMeter(m);
     });
   }
 
