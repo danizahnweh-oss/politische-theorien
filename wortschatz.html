@@ -36,18 +36,11 @@
 
 <section id="wortschatz">
   <div class="wrap">
-    <div class="sec-head"><span class="sec-num">0</span><h2>Wortschatztraining: Begriffe sichern</h2></div>
-    <p class="sec-sub">Startphase: 15 bis 20 Minuten. Die Karten können einzeln aufgedeckt werden.</p>
-    <div class="vocab-grid" id="vocab"></div>
-    <div class="task">
-      <div class="q-meta"><span class="q-type">Kurzcheck</span><span class="q-pts">AFB I bis II</span></div>
-      <p class="qtext">Formuliere mit drei Begriffen aus den Karten einen Satz zur Oberfrage.
-        <span class="sub">Beispielstruktur: Eine politische Theorie erklärt, wie ...</span></p>
-      <textarea data-min="120" placeholder="Dein Satz mit mindestens drei Fachbegriffen ..."></textarea>
-      <div class="ta-meter"><span class="cnt">0 Zeichen</span><span class="ta-bar"><i></i></span></div>
-      <button class="btn" disabled>Musteridee anzeigen</button>
-      <div class="reveal"><p>Mögliche Antwort: Eine politische Theorie erklärt, wie das Verhältnis von Individuum, Staat und Gesellschaft geordnet werden soll, zum Beispiel durch Naturrechte, Gewaltenteilung oder Volkssouveränität.</p></div>
-    </div>
+    <div class="sec-head"><span class="sec-num">0</span><h2>Wortschatz-Memory: Begriffe sichern</h2></div>
+    <p class="sec-sub">Startphase in Eigenarbeit: 15 bis 20 Minuten. Decke nacheinander zwei Karten auf und finde die Paare aus Begriff und passender Definition. Gefundene Paare bleiben offen.</p>
+    <p class="mem-status" id="memStatus" role="status" aria-live="polite">0 von 10 Paaren · 0 Versuche</p>
+    <div class="mem-grid" id="memory"></div>
+    <button class="btn" id="memRestart" type="button">Neu mischen</button>
 
     <nav class="page-nav" aria-label="Seitenwechsel">
       <a class="prev" href="index.html"><span class="pn-dir">Zurück</span><span class="pn-title">Start</span></a>

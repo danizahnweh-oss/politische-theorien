@@ -41,28 +41,78 @@ if(opList){
   });
 }
 
-// Wortschatzkarten (nur auf der Wortschatz-Seite)
-// Karte ist ein div (kein button): Chromium flacht 3D-Transforms in
-// button-Elementen ab, dadurch würde der Flip nicht sichtbar sein.
-const vocabWrap = document.querySelector("#vocab");
-if(vocabWrap){
-  vocab.forEach(([term, definition]) => {
+// Wortschatz-Memory (nur auf der Wortschatz-Seite)
+// Klassisches Paare-Spiel in Eigenarbeit: zu jedem Begriff gibt es eine
+// Begriffs- und eine Definitionskarte. Karten sind divs (kein button):
+// Chromium flacht 3D-Transforms in button-Elementen ab.
+const memWrap = document.querySelector("#memory");
+if(memWrap){
+  const status = document.querySelector("#memStatus");
+  const total = vocab.length;
+  // Zwei Karten je Begriff bauen (Begriff + passende Definition).
+  const cards = [];
+  vocab.forEach(([term, definition], i) => {
+    cards.push({pair:i, kind:"term", label:term});
+    cards.push({pair:i, kind:"def", label:definition});
+  });
+  // Mischen (Fisher-Yates).
+  for(let i = cards.length - 1; i > 0; i--){
+    const j = Math.floor(Math.random() * (i + 1));
+    [cards[i], cards[j]] = [cards[j], cards[i]];
+  }
+  let first = null, lock = false, found = 0, moves = 0;
+  const setStatus = () => {
+    status.textContent = `${found} von ${total} Paaren · ${moves} Versuche`;
+  };
+  cards.forEach(data => {
     const card = document.createElement("div");
-    card.className = "vcard";
+    card.className = "mcard";
     card.tabIndex = 0;
     card.setAttribute("role", "button");
-    card.setAttribute("aria-label", `Begriff ${term}, umdrehen für Definition`);
-    card.innerHTML = `<span class="vcard-inner"><span class="vface vfront"><span class="vterm">${term}</span><span class="vhint">anklicken zum Umdrehen</span></span><span class="vface vback">${definition}</span></span>`;
-    const flip = () => card.classList.toggle("flip");
-    card.addEventListener("click", flip);
+    card.setAttribute("aria-label", "Verdeckte Karte, zum Aufdecken auswählen");
+    card.innerHTML = `<span class="mcard-inner"><span class="mface mfront">?</span><span class="mface mback ${data.kind}">${data.label}</span></span>`;
+    const reveal = () => {
+      if(lock || card.classList.contains("flip") || card.classList.contains("done")){ return; }
+      card.classList.add("flip");
+      card.setAttribute("aria-label", data.label);
+      if(!first){ first = {card, data}; return; }
+      moves++;
+      if(first.data.pair === data.pair && first.card !== card){
+        first.card.classList.add("done");
+        card.classList.add("done");
+        found++;
+        setStatus();
+        first = null;
+        if(found === total){
+          status.textContent = `Alle ${total} Paare gefunden · ${moves} Versuche. Stark!`;
+          status.classList.add("mem-win");
+        }
+      } else {
+        lock = true;
+        const a = first.card, b = card;
+        setStatus();
+        setTimeout(() => {
+          a.classList.remove("flip");
+          b.classList.remove("flip");
+          a.setAttribute("aria-label", "Verdeckte Karte, zum Aufdecken auswählen");
+          b.setAttribute("aria-label", "Verdeckte Karte, zum Aufdecken auswählen");
+          lock = false;
+        }, 950);
+        first = null;
+      }
+    };
+    card.addEventListener("click", reveal);
     card.addEventListener("keydown", event => {
       if(event.key === "Enter" || event.key === " "){
         event.preventDefault();
-        flip();
+        reveal();
       }
     });
-    vocabWrap.appendChild(card);
+    memWrap.appendChild(card);
   });
+  setStatus();
+  const restart = document.querySelector("#memRestart");
+  if(restart){ restart.addEventListener("click", () => location.reload()); }
 }
 
 const opToggle = document.querySelector("#opToggle");
