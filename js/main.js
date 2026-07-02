@@ -41,6 +41,22 @@ if(opList){
   });
 }
 
+// Glossar: erst alle Begriffe mit Erklaerung (Schritt 1 vor dem Memory).
+const glossar = document.querySelector("#glossar");
+if(glossar){
+  vocab.forEach(([term, definition]) => {
+    const item = document.createElement("div");
+    item.className = "gloss-item";
+    const dt = document.createElement("dt");
+    dt.textContent = term;
+    const dd = document.createElement("dd");
+    dd.textContent = definition;
+    item.appendChild(dt);
+    item.appendChild(dd);
+    glossar.appendChild(item);
+  });
+}
+
 // Wortschatz-Memory (nur auf der Wortschatz-Seite)
 // Klassisches Paare-Spiel in Eigenarbeit: zu jedem Begriff gibt es eine
 // Begriffs- und eine Definitionskarte. Karten sind divs (kein button):
