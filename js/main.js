@@ -1,17 +1,17 @@
 const operators = [
-  ["nennen","AFB I","Information knapp wiedergeben, ohne lange Erklaerung."],
+  ["nennen","AFB I","Information knapp wiedergeben, ohne lange Erklärung."],
   ["beschreiben","AFB I","Material geordnet darstellen: Was sieht man? Was steht da?"],
   ["herausarbeiten","AFB II","Zentrale Aussagen gezielt aus Material entnehmen und ordnen."],
-  ["erlaeutern","AFB II","Eine Aussage erklaeren und mit Hintergrundwissen verstaendlich machen."],
+  ["erläutern","AFB II","Eine Aussage erklären und mit Hintergrundwissen verständlich machen."],
   ["vergleichen","AFB II","Gemeinsamkeiten und Unterschiede nach klaren Kriterien zeigen."],
   ["analysieren","AFB II","Material untersuchen: Aufbau, Inhalt, Aussage, Wirkung."],
-  ["beurteilen","AFB III","Argumente abwaegen und zu einem begruendeten Sachurteil kommen."],
-  ["bewerten","AFB III","Ein begruendetes Urteil mit eigenen oder vorgegebenen Wertmassstaeben formulieren."]
+  ["beurteilen","AFB III","Argumente abwägen und zu einem begründeten Sachurteil kommen."],
+  ["bewerten","AFB III","Ein begründetes Urteil mit eigenen oder vorgegebenen Wertmaßstäben formulieren."]
 ];
 const vocab = [
   ["Naturrechte","Vorstaatliche Rechte, die jedem Menschen zukommen, etwa Leben, Freiheit und Eigentum."],
-  ["Gesellschaftsvertrag","Denkmodell: Menschen gruenden eine politische Ordnung, um Freiheit und Sicherheit zu sichern."],
-  ["Volkssouveraenitaet","Die legitime Staatsgewalt geht vom Volk aus."],
+  ["Gesellschaftsvertrag","Denkmodell: Menschen gründen eine politische Ordnung, um Freiheit und Sicherheit zu sichern."],
+  ["Volkssouveränität","Die legitime Staatsgewalt geht vom Volk aus."],
   ["Gewaltenteilung","Staatsgewalt wird auf Legislative, Exekutive und Judikative verteilt."],
   ["Konservatismus","Politisches Denken, das Tradition, Ordnung und organischen Wandel betont."],
   ["Liberalismus","Politisches Denken, das individuelle Freiheit, Rechte und begrenzte Herrschaft betont."],
@@ -43,7 +43,7 @@ if(opList){
 
 // Wortschatzkarten (nur auf der Wortschatz-Seite)
 // Karte ist ein div (kein button): Chromium flacht 3D-Transforms in
-// button-Elementen ab, dadurch wuerde der Flip nicht sichtbar sein.
+// button-Elementen ab, dadurch würde der Flip nicht sichtbar sein.
 const vocabWrap = document.querySelector("#vocab");
 if(vocabWrap){
   vocab.forEach(([term, definition]) => {
@@ -51,7 +51,7 @@ if(vocabWrap){
     card.className = "vcard";
     card.tabIndex = 0;
     card.setAttribute("role", "button");
-    card.setAttribute("aria-label", `Begriff ${term}, umdrehen fuer Definition`);
+    card.setAttribute("aria-label", `Begriff ${term}, umdrehen für Definition`);
     card.innerHTML = `<span class="vcard-inner"><span class="vface vfront"><span class="vterm">${term}</span><span class="vhint">anklicken zum Umdrehen</span></span><span class="vface vback">${definition}</span></span>`;
     const flip = () => card.classList.toggle("flip");
     card.addEventListener("click", flip);

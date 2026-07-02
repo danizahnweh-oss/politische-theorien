@@ -105,6 +105,14 @@ p{margin:0 0 15px;max-width:68ch}
 .source{background:#ece7dc;border-left:3px solid var(--steel)}
 .source-tag,.mini-label{display:inline-flex;align-items:center;gap:6px;font-size:10px;letter-spacing:.1em;text-transform:uppercase;font-weight:600;color:var(--paper);background:var(--steel);border-radius:var(--r);padding:3px 8px;margin-bottom:10px}
 .source-tag.accent{background:var(--accent)}
+figure.q-fig{margin:22px 0;background:var(--blatt);border:1px solid var(--line);border-radius:var(--r);padding:14px}
+figure.q-fig img{display:block;width:100%;height:auto;border:1px solid var(--line);border-radius:var(--r);background:#fff}
+figure.q-fig.portrait{max-width:300px}
+figure.q-fig figcaption{font-family:var(--font-mono);font-size:11px;letter-spacing:.03em;color:var(--ink-soft);margin-top:9px;line-height:1.4}
+figure.q-fig figcaption b{color:var(--ink)}
+.fig-row{display:flex;gap:16px;flex-wrap:wrap;margin:22px 0}
+.fig-row figure.q-fig{flex:1;min-width:200px;margin:0}
+.fig-row figure.q-fig img{aspect-ratio:auto}
 .hook-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin:20px 0}
 .hook-card{background:var(--blatt);border:1px solid var(--line);border-top:2px solid var(--accent);border-radius:var(--r);padding:18px}
 .hook-card h3{font-size:19px;margin:0 0 6px}
